@@ -1,0 +1,1 @@
+When you guess the correct animal you get a mini quiz about the animal and ends when you get an answer wrong or get all sub questions correct
