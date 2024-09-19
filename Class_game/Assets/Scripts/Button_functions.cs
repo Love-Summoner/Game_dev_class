@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Button_functions : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public string next_level;
+
+    private void Start()
     {
-        
+        DontDestroyOnLoad(this);
+    }
+    public void play_game()
+    {
+        next_level = "Game_scene";
+        SceneManager.LoadScene("Load_screen");
+        StartCoroutine(load());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void quit()
     {
-        
+        Application.Quit();
+    }
+    IEnumerator load()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(next_level);
     }
 }
