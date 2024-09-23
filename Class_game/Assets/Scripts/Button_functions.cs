@@ -17,7 +17,10 @@ public class Button_functions : MonoBehaviour
         SceneManager.LoadScene("Load_screen");
         StartCoroutine(load());
     }
-
+    public void main_menu()
+    {
+        SceneManager.LoadScene("Main_Menu");
+    }
     public void quit()
     {
         Application.Quit();
@@ -26,5 +29,6 @@ public class Button_functions : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(next_level);
+        Destroy(gameObject);
     }
 }

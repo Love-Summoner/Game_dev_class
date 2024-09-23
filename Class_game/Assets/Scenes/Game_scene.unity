@@ -403,6 +403,7 @@ GameObject:
   - component: {fileID: 244298758}
   - component: {fileID: 244298757}
   - component: {fileID: 244298756}
+  - component: {fileID: 244298759}
   m_Layer: 5
   m_Name: answer4
   m_TagString: Untagged
@@ -473,7 +474,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 244298757}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 244298759}
+        m_TargetAssemblyTypeName: answers, Assembly-CSharp
+        m_MethodName: when_clicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &244298757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +525,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244298754}
   m_CullTransparentMesh: 1
+--- !u!114 &244298759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244298754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9e5231509fab34ebe1364a115858ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quiz_manager: {fileID: 1670472089}
 --- !u!1 &436633521
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,6 +677,51 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &469600648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 469600650}
+  - component: {fileID: 469600649}
+  m_Layer: 0
+  m_Name: Button_functions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &469600649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469600648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e1139040b92274e9e1dd18492de2ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  next_level: 
+--- !u!4 &469600650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469600648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1007.7222, y: 560.22906, z: 5.0704174}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -802,6 +873,7 @@ GameObject:
   - component: {fileID: 555933849}
   - component: {fileID: 555933848}
   - component: {fileID: 555933847}
+  - component: {fileID: 555933850}
   m_Layer: 5
   m_Name: answer3
   m_TagString: Untagged
@@ -872,7 +944,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 555933848}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 555933850}
+        m_TargetAssemblyTypeName: answers, Assembly-CSharp
+        m_MethodName: when_clicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &555933848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,6 +995,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555933845}
   m_CullTransparentMesh: 1
+--- !u!114 &555933850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555933845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9e5231509fab34ebe1364a115858ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quiz_manager: {fileID: 1670472089}
 --- !u!1 &839013073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,7 +2000,7 @@ GameObject:
   - component: {fileID: 1759373520}
   - component: {fileID: 1759373519}
   m_Layer: 5
-  m_Name: answer1
+  m_Name: Main_menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1973,13 +2070,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1670472084}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 469600649}
+        m_TargetAssemblyTypeName: Button_functions, Assembly-CSharp
+        m_MethodName: main_menu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2035,6 +2132,7 @@ GameObject:
   - component: {fileID: 1801272291}
   - component: {fileID: 1801272290}
   - component: {fileID: 1801272289}
+  - component: {fileID: 1801272292}
   m_Layer: 5
   m_Name: answer1
   m_TagString: Untagged
@@ -2106,13 +2204,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1670472084}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1801272292}
+        m_TargetAssemblyTypeName: answers, Assembly-CSharp
+        m_MethodName: when_clicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2156,6 +2254,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801272287}
   m_CullTransparentMesh: 1
+--- !u!114 &1801272292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801272287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9e5231509fab34ebe1364a115858ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quiz_manager: {fileID: 1670472089}
 --- !u!1 &2006496895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,6 +2279,7 @@ GameObject:
   - component: {fileID: 2006496899}
   - component: {fileID: 2006496898}
   - component: {fileID: 2006496897}
+  - component: {fileID: 2006496900}
   m_Layer: 5
   m_Name: answer2
   m_TagString: Untagged
@@ -2238,7 +2350,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2006496898}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2006496900}
+        m_TargetAssemblyTypeName: answers, Assembly-CSharp
+        m_MethodName: when_clicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2006496898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2277,6 +2401,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006496895}
   m_CullTransparentMesh: 1
+--- !u!114 &2006496900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006496895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9e5231509fab34ebe1364a115858ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quiz_manager: {fileID: 1670472089}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2285,3 +2422,4 @@ SceneRoots:
   - {fileID: 1457361847}
   - {fileID: 1670472088}
   - {fileID: 464521667}
+  - {fileID: 469600650}

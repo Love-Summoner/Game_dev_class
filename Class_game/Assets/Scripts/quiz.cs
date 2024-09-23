@@ -9,8 +9,9 @@ public class quiz : MonoBehaviour
     private TMP_Text question;
     private GameObject[] answers = new GameObject[4];
     private string correct_answer;
-    private string[] answer_pool = { "Pig", "Dog", "Cat", "Crow", "Lizard" };
-    private string[,] question_pool = { {"Pig", "" }, { "", ""} };
+    private string[] answer_pool = { "Pig", "Dog", "Cat", "Crow", "Lizard", "Deer", "Capybara" };
+    private string[,] question_pool = { {"Which of these animals are related to pigs?", "Which of these colors can a pig be?" }, { "", ""} };
+    private string[] bonus_answers = { "Daeodon", "Dodo bird", "Sloth", "Alligator", "Brown", "Red", "Blue", "Yellow"};
     private string default_question = "What animal is this?";
     private List<string> already_asked = new List<string>();
 
@@ -50,6 +51,11 @@ public class quiz : MonoBehaviour
 
     public void allocate_answers()
     {
+        if (question_number < 6)
+            question_number++;
+        else
+            end_game();
+
         int correct = Random.Range(0, answers.Length);
         List<string> false_answers = new List<string>();
 
@@ -64,17 +70,22 @@ public class quiz : MonoBehaviour
             false_answers.Add(temp_answer);
         }
         answers[correct].transform.GetChild(0).GetComponent<TMP_Text>().text = correct_answer;
-        if (question_number < 5)
-            question_number++;
-        else
-            end_game();
+        
     }
     public void recieve_answer(string message)
     {
+        Debug.Log(correct_answer);
         if(message == correct_answer)
         {
             starting_question();
+            return;
         }
+        else
+            starting_question();
+    }
+    private void ask_sub_question()
+    {
+
     }
     private void end_game()
     {
