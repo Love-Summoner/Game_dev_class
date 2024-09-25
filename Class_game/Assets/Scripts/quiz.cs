@@ -13,7 +13,7 @@ public class quiz : MonoBehaviour
     private TMP_Text question;
     private GameObject[] answers = new GameObject[4];
     private string correct_answer;
-    private string[] answer_pool = { "Pig", "Dog", "Cat", "Crow", "Lizard", "Deer", "Capybara" };
+    private string[] answer_pool = { "Pig", "Dog", "Cat", "Crow", "Lizard", "Deer", "Capybara", "Whale", "Elephant", "Dinosaur" };
 
     private string[,] question_pool = { {"Which of these animals are related to pigs?", "Which of these colors can a pig be?" }, 
         { "Which of these animals are closely related to dogs?", "Which of these dog breeds is the biggest?"},
@@ -21,7 +21,10 @@ public class quiz : MonoBehaviour
         { "What is a flock of crows called?", "What age does a human become smarter than a crow?"},
         { "What is the biggest species of lizard?", "What family of lizards does the Komodo Dragon belong to?"},
         {"What is a female deer called?","What is the species of deer that have fangs?" },
-        { "What are capybaras?", "How big are capybara herds?"} };
+        { "What are capybaras?", "How big are capybara herds?"},
+        {"How much does a blue whale weigh?","What whale has a horn?" },
+        { "How many gallons of water can an elephants trunk hold?", "How long can an elephant remember something?"},
+        { "What is the biggest flying dinosaur?", "What is the biggest land dinosaur?"} };
 
     private string[,] bonus_answers = { { "Daeodon", "Dodo bird", "Sloth", "Alligator", "Brown", "Red", "Blue", "Yellow" }, 
         { "Wolves", "GroundHog", "Cat", "Ant Eater", "Great Dane", "Concur Spaniel", "Shih Tzu", "Goldren Retriever" },
@@ -29,7 +32,11 @@ public class quiz : MonoBehaviour
         { "Murder", "Flock", "Group", "Family", "7", "3", "5", "8" },
         { "Komodo Dragon", "Chameleon", "Beaded Dragon", "Gila Monster", "Monitor Lizards", "Connoli", "Gekkonidae", "Dibamidae" }, 
         { "Doe", "Female Deer", "Fawn", "Buck", "Musk Deer", "Deer", "Reindeer", "Moose"},
-        { "Rodents", "Reptiles", "Birds", "Fish", "10-20", "1-2", "5-10", "20-40" }};
+        { "Rodents", "Reptiles", "Birds", "Fish", "10-20", "1-2", "5-10", "20-40" },
+        { "300,000 lbs", "200,000 lbs", "20,000 lbs", "500,000 lbs", "Narwhal", "Blue Whale", "Grey Whale", "Orca" },
+        { "2.5", "3", "1", "0", "Lifetime", "10 years", "1 year", "30 years" },
+        { "Quetzal", "Pternodon", "Microraptor", "Stegosaurus", "Argentitanosaurus", "T-rex", "Brontosaurus", "Mosasaurus" }};
+
     private string default_question = "What animal is this?";
     private List<string> already_asked = new List<string>();
     public float score = 0;
@@ -91,7 +98,6 @@ public class quiz : MonoBehaviour
             false_answers.Add(temp_answer);
         }
         answers[correct].transform.GetChild(0).GetComponent<TMP_Text>().text = correct_answer;
-        Debug.Log(correct_answer);
     }
     public void recieve_answer(string message)
     {
@@ -149,7 +155,6 @@ public class quiz : MonoBehaviour
     }
     private void end_game()
     {
-        Debug.Log(score);
         GameObject.Find("End_Screen").transform.GetChild(0).gameObject.SetActive(true);
         GameObject.Find("Game").SetActive(false);
     }
