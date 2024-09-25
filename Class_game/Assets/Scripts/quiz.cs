@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,9 +12,10 @@ public class quiz : MonoBehaviour
     private string correct_answer;
     private string[] answer_pool = { "Pig", "Dog", "Cat", "Crow", "Lizard", "Deer", "Capybara" };
     private string[,] question_pool = { {"Which of these animals are related to pigs?", "Which of these colors can a pig be?" }, { "", ""} };
-    private string[] bonus_answers = { "Daeodon", "Dodo bird", "Sloth", "Alligator", "Brown", "Red", "Blue", "Yellow"};
+    private string[,] bonus_answers = { { "Daeodon", "Dodo bird", "Sloth", "Alligator", "Brown", "Red", "Blue", "Yellow" } };
     private string default_question = "What animal is this?";
     private List<string> already_asked = new List<string>();
+    private int score = 0;
 
     void Start()
     {
@@ -70,22 +72,61 @@ public class quiz : MonoBehaviour
             false_answers.Add(temp_answer);
         }
         answers[correct].transform.GetChild(0).GetComponent<TMP_Text>().text = correct_answer;
-        
+        Debug.Log(correct_answer);
     }
     public void recieve_answer(string message)
     {
-        Debug.Log(correct_answer);
-        if(message == correct_answer)
+        if (message == correct_answer)
         {
-            starting_question();
+            score += 20;
+            ask_sub_question(cur_question);
             return;
         }
         else
+        {
+            Sub_question_asked = new List<int>();
             starting_question();
+        }
     }
-    private void ask_sub_question()
-    {
 
+    private List<int> Sub_question_asked = new List<int>();
+    private void ask_sub_question(int this_question)
+    {
+        if(Sub_question_asked.Count == 2)
+        {
+            Sub_question_asked = new List<int>();
+            starting_question();
+            return;
+        }
+        int which_question = Random.Range(0, 2);
+        while (Sub_question_asked.Contains(which_question))
+        {
+            which_question = Random.Range(0, 2);
+        }
+        Sub_question_asked.Add(which_question);
+        int answer_pointer = which_question * 4;
+        correct_answer = bonus_answers[this_question, answer_pointer];
+        
+        question.text = question_pool[this_question, which_question];
+
+        allocate_sub_asnwers(answer_pointer, this_question);
+    }
+
+    private void allocate_sub_asnwers(int anwer_marker, int real_question)
+    {
+        List<int> sub_asnwer_buttons = new List<int>();
+        int temp = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            temp = Random.Range(0, 4);
+            while (sub_asnwer_buttons.Contains(temp))
+            {
+                temp = Random.Range(0, 4);
+            }
+            sub_asnwer_buttons.Add(temp);
+
+            answers[temp].GetComponentInChildren<TMP_Text>().text = bonus_answers[real_question, anwer_marker+i];
+        }
     }
     private void end_game()
     {
