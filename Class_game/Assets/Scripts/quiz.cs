@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class quiz : MonoBehaviour
 {
+    [SerializeField] private Sprite[] animal_sprites;
+    private Image animal_image;
+
     private TMP_Text question;
     private GameObject[] answers = new GameObject[4];
     private string correct_answer;
@@ -25,7 +28,7 @@ public class quiz : MonoBehaviour
         { "9", "1", "3", "0", "Both", "Neither", "Dead", "Alive" },
         { "Murder", "Flock", "Group", "Family", "7", "3", "5", "8" },
         { "Komodo Dragon", "Chameleon", "Beaded Dragon", "Gila Monster", "Monitor Lizards", "Connoli", "Gekkonidae", "Dibamidae" }, 
-        { "Doe", "Female Deet", "Fawn", "Buck", "Musk Deer", "Deer", "Reindeer", "Moose"},
+        { "Doe", "Female Deer", "Fawn", "Buck", "Musk Deer", "Deer", "Reindeer", "Moose"},
         { "Rodents", "Reptiles", "Birds", "Fish", "10-20", "1-2", "5-10", "20-40" }};
     private string default_question = "What animal is this?";
     private List<string> already_asked = new List<string>();
@@ -33,6 +36,7 @@ public class quiz : MonoBehaviour
 
     void Start()
     {
+        animal_image = GameObject.Find("Animal").GetComponent<Image>();
         question = GameObject.Find("Question_background").transform.GetChild(0).GetComponent<TMP_Text>();
         GameObject button_parent = GameObject.Find("Buttons");
         int i = 0;
@@ -60,6 +64,7 @@ public class quiz : MonoBehaviour
         }
 
         init = true;
+        change_image(cur_question);
 
         already_asked.Add(correct_answer);
         allocate_answers();
@@ -147,5 +152,9 @@ public class quiz : MonoBehaviour
         Debug.Log(score);
         GameObject.Find("End_Screen").transform.GetChild(0).gameObject.SetActive(true);
         GameObject.Find("Game").SetActive(false);
+    }
+    private void change_image(int i)
+    {
+        animal_image.sprite = animal_sprites[i];
     }
 }
