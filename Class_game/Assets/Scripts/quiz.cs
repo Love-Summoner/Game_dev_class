@@ -10,6 +10,9 @@ public class quiz : MonoBehaviour
     [SerializeField] private Sprite[] animal_sprites;
     private Image animal_image;
 
+    private AudioSource source;
+    [SerializeField] private AudioClip right, wrong;
+
     private TMP_Text question;
     private GameObject[] answers = new GameObject[4];
     private string correct_answer;
@@ -43,6 +46,7 @@ public class quiz : MonoBehaviour
 
     void Start()
     {
+        source = GetComponent<AudioSource>();
         animal_image = GameObject.Find("Animal").GetComponent<Image>();
         question = GameObject.Find("Question_background").transform.GetChild(0).GetComponent<TMP_Text>();
         GameObject button_parent = GameObject.Find("Buttons");
@@ -57,7 +61,7 @@ public class quiz : MonoBehaviour
     }
     private bool init = false;
     private int cur_question;
-    private int question_number = 1;
+    public int question_number = 1;
     public void starting_question()
     {
         cur_question = Random.Range(0, answer_pool.Length);
@@ -103,12 +107,16 @@ public class quiz : MonoBehaviour
     {
         if (message == correct_answer)
         {
+            source.clip = right;
+            source.Play();
             score += 20;
             ask_sub_question(cur_question);
             return;
         }
         else
         {
+            source.clip = wrong;
+            source.Play();
             Sub_question_asked = new List<int>();
             starting_question();
         }

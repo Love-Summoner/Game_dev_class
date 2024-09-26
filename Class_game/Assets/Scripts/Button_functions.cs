@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Button_functions : MonoBehaviour
 {
     public string next_level;
+    [SerializeField] private GameObject canvas;
 
     private void Start()
     {
@@ -24,6 +25,16 @@ public class Button_functions : MonoBehaviour
     public void quit()
     {
         Application.Quit();
+    }
+    public void how_to_play()
+    {
+        GameObject.Find("Tutorial").transform.GetChild(0).gameObject.SetActive(true);
+        canvas.SetActive(false);
+    }
+    public void back_to_menu()
+    {
+        canvas.SetActive(true);
+        GameObject.Find("Tutorial").transform.GetChild(0).gameObject.SetActive(false);
     }
     IEnumerator load()
     {
