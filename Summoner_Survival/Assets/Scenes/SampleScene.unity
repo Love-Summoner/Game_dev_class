@@ -524,6 +524,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &920056300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920056301}
+  m_Layer: 0
+  m_Name: Crow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &920056301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920056300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.95, y: 0.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1311716465}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1311716461
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,6 +566,7 @@ GameObject:
   - component: {fileID: 1311716465}
   - component: {fileID: 1311716464}
   - component: {fileID: 1311716463}
+  - component: {fileID: 1311716467}
   - component: {fileID: 1311716462}
   - component: {fileID: 1311716466}
   m_Layer: 0
@@ -653,7 +685,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.195, y: 1.84, z: 1.19505}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 920056301}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1311716466
@@ -701,6 +734,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1311716467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311716461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69ef4ae0d26fb67408d1274ff1d4f20c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cur_level: 0
+  cur_experience: 0
+  exp_til_level_up: 10
 --- !u!1 &1383133819
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +969,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   min_distance: 10
   speed: 5
+  material_type: 0
+  exp_worth: 10
 --- !u!1 &1472499928
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,7 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39630fe9e664b0946bfb98e832f7bdf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 1.5
 --- !u!61 &1472499930
 BoxCollider2D:
   m_ObjectHideFlags: 0

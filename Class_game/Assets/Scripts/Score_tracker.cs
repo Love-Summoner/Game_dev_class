@@ -26,7 +26,7 @@ public class Score_tracker : MonoBehaviour
                     transform.GetChild(2).GetComponent<TMP_Text>().text = "Great Score!";
                     break;
                 case < 300:
-                    transform.GetChild(2).GetComponent<TMP_Text>().text = "Increadle!";
+                    transform.GetChild(2).GetComponent<TMP_Text>().text = "Incredible!";
                     break;
                 case 300:
                     transform.GetChild(2).GetComponent<TMP_Text>().text = "Perfect Score!\nAmazing!";

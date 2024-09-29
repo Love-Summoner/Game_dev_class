@@ -16,11 +16,13 @@ public class Button_functions : MonoBehaviour
     {
         next_level = "Game_scene";
         SceneManager.LoadScene("Load_screen");
-        StartCoroutine(load());
+        StartCoroutine(load(3));
     }
     public void main_menu()
     {
-        SceneManager.LoadScene("Main_Menu");
+        next_level = "Main_Menu";
+        SceneManager.LoadScene("Load_screen");
+        StartCoroutine(load(1));
     }
     public void quit()
     {
@@ -36,9 +38,9 @@ public class Button_functions : MonoBehaviour
         canvas.SetActive(true);
         GameObject.Find("Tutorial").transform.GetChild(0).gameObject.SetActive(false);
     }
-    IEnumerator load()
+    IEnumerator load(float time)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(time);
         SceneManager.LoadScene(next_level);
         Destroy(gameObject);
     }

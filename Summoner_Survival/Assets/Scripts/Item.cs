@@ -5,16 +5,22 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField] private float min_distance, speed;
+    [SerializeField] private Summon_materials material_type = 0;
+    [SerializeField] private int exp_worth = 1;
+
     private Transform player_loc;
+    private Inventory player_inventory;
 
     private void Start()
     {
         player_loc = GameObject.Find("Player").transform;
+        player_inventory = player_loc.gameObject.GetComponent<Inventory>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
+            player_inventory.level_up(exp_worth);
             Destroy(gameObject);
         }
     }

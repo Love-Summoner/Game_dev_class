@@ -712,6 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   next_level: 
+  canvas: {fileID: 0}
 --- !u!4 &469600650
 Transform:
   m_ObjectHideFlags: 0
@@ -1794,12 +1795,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227958949}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 938.10596, y: 539.87976, z: -4.239695}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.686167, y: 4.9988866, z: 89.96075}
+  m_LocalScale: {x: 0.009259259, y: 0.009259259, z: 0.009259259}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1670472088}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1227958951
 AudioSource:
@@ -3096,7 +3097,6 @@ RectTransform:
   - {fileID: 1314274753}
   - {fileID: 1580213540}
   - {fileID: 436633522}
-  - {fileID: 1227958950}
   - {fileID: 909993354}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3144,7 +3144,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.311
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4161,3 +4161,4 @@ SceneRoots:
   - {fileID: 1670472088}
   - {fileID: 464521667}
   - {fileID: 469600650}
+  - {fileID: 1227958950}
