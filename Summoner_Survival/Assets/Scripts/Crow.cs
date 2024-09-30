@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Crow : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject bullet;
 
-    // Update is called once per frame
+
+    private bool on_cooldown = false;
+    private float fire_rate = 2;
     void Update()
     {
-        
+        if(on_cooldown)
+        {
+            return;
+        }
+        Instantiate(bullet, transform.position, transform.rotation);
+        StartCoroutine(shoot());
+    }
+
+    IEnumerator shoot()
+    {
+        on_cooldown=true;
+        yield return new WaitForSeconds(fire_rate);
+        on_cooldown=false;
     }
 }

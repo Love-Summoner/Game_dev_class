@@ -13,7 +13,7 @@ public struct slot
 public class Inventory : MonoBehaviour
 {
     private slot[] inventory = new slot[(int)Summon_materials.BONE + 1];
-    public float cur_level = 0, cur_experience = 0, exp_til_level_up = 10;
+    public float cur_level = 0, cur_experience = 0, exp_til_level_up = 5;
 
     private void Start()
     {

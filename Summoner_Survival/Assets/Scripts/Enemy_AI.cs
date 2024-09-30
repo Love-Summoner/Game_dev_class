@@ -5,9 +5,12 @@ using UnityEngine;
 public class Enemy_AI : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private GameObject experience;
 
     private Transform player_loc;
     private Rigidbody2D rb;
+
+    private float health = 3;
 
     private void Start()
     {
@@ -20,6 +23,17 @@ public class Enemy_AI : MonoBehaviour
         {
             kill_player();
         }
+        if(collision.tag == "Player_bullet")
+        {
+            health--;
+
+            if(health <= 0)
+            {
+                Instantiate(experience, transform.position, transform.rotation);
+                Destroy(collision.gameObject);
+                Destroy(gameObject);
+            }
+        }
     }
 
     private Vector2 distance = Vector2.zero;
@@ -27,10 +41,7 @@ public class Enemy_AI : MonoBehaviour
     {
         distance = player_loc.position - transform.position;
 
-        if (Mathf.Abs(distance.x) > .1f)
-            rb.velocity = new Vector2(speed * Mathf.Sign(distance.x), rb.velocity.y);
-        if (Mathf.Abs(distance.y) > .1f)
-            rb.velocity = new Vector2(rb.velocity.x, speed * Mathf.Sign(distance.y));
+        rb.velocity = distance.normalized * speed;
     }
     private void kill_player()
     {
