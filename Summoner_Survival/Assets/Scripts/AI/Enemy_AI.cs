@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Enemy_AI : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     [SerializeField] private GameObject experience;
 
     private Transform player_loc;
     private Rigidbody2D rb;
 
-    private float health = 3;
+    public float health = 3;
 
     private void Start()
     {
@@ -23,22 +23,37 @@ public class Enemy_AI : MonoBehaviour
         {
             kill_player();
         }
-        if(collision.tag == "Player_bullet")
+        else if(collision.tag == "Player_bullet")
         {
-            health--;
-
-            if(health <= 0)
-            {
-                Instantiate(experience, transform.position, transform.rotation);
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
-            }
+            StartCoroutine(Damage(1));
+            Destroy(collision.gameObject);
+        }
+        else if(collision.tag == "Melee_attack")
+        {
+            collision.gameObject.SetActive(false);
+            rooted = true;
+        }
+    }
+    public IEnumerator Damage(float damage)
+    {
+        yield return new WaitForSeconds(.1f);
+        health-= damage;
+        if (health <= 0 && gameObject != null)
+        {
+            Instantiate(experience, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
     }
 
+    private bool rooted = false;
     private Vector2 distance = Vector2.zero;
     private void Update()
     {
+        if(rooted)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
         distance = player_loc.position - transform.position;
 
         rb.velocity = distance.normalized * speed;

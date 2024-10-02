@@ -6,7 +6,7 @@ public class Item : MonoBehaviour
 {
     [SerializeField] private float min_distance, speed;
     [SerializeField] private Summon_materials material_type = 0;
-    [SerializeField] private int exp_worth = 1;
+    [SerializeField] public int exp_worth = 1;
 
     private Transform player_loc;
     private Inventory player_inventory;

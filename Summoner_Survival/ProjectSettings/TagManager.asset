@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Player_bullet
   - Enemy
+  - Melee_attack
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 
@@ -45,4 +46,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Testing
+    uniqueID: 1952851359
     locked: 0
