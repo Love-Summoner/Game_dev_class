@@ -9,24 +9,18 @@ public class WolfAI : MonoBehaviour
     [SerializeField] private LayerMask enemy_layer;
     private Rigidbody2D rb;
     private GameObject attack_box, default_target;
-    private CircleCollider2D circle;
+    public int wolf_count = 0;
 
     private bool is_targeting = false;
     private GameObject target;
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Enemy" && !is_targeting)
-        {
-            target = collision.gameObject;
-            is_targeting = true;
-        }
-    }
+    private Targeting target_system;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         attack_box = transform.GetChild(0).gameObject;
         default_target = GameObject.Find("Player");
-        circle = GetComponent<CircleCollider2D>();
+        target_system = GameObject.Find("Targeting_system").GetComponent<Targeting>();
     }
 
     private Vector2 distance = Vector2.zero;
@@ -42,12 +36,11 @@ public class WolfAI : MonoBehaviour
         {
             Reset_state();
         }
-        if (!is_targeting && target == null && !already_searched)
+        if (!is_targeting && target == null)
         {
             search_for_target();
             return;
         }
-        already_searched = false;
         
     }
     private void Chase_target()
@@ -92,28 +85,23 @@ public class WolfAI : MonoBehaviour
     }
     private void search_for_target()
     {
-        GameObject[] options = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject go in options)
+        if (target_system.target_exist(wolf_count))
         {
-            if((go.transform.position - transform.position).sqrMagnitude < circle.radius)
-            {
-                target = go;
-                already_searched = true;
-                return;
-            }
+            target = target_system.get_target(wolf_count);
+            is_targeting = true;
         }
     }
 
     private bool is_attacking = false;
     IEnumerator attack()
     {
+        if(target != null) 
+            StartCoroutine(target.GetComponent<Enemy_AI>().Damage(1));
         is_attacking = true;
         attack_box.SetActive(true);
         yield return new WaitForSeconds(attack_speed);
         attack_box.SetActive(false);
         is_attacking = false;
-        if(target != null) 
-            StartCoroutine(target.GetComponent<Enemy_AI>().Damage(1));
+        
     }
 }

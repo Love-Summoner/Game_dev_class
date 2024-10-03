@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Summon_stats : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float bullet_damage, bullet_speed, melee_damage, melee_speed;
     void Start()
     {
         

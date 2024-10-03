@@ -11,11 +11,15 @@ public class Enemy_AI : MonoBehaviour
     private Rigidbody2D rb;
 
     public float health = 3;
+    private Targeting target_system;
+    private SpriteRenderer enemy_sprite;
 
     private void Start()
     {
         player_loc = GameObject.Find("Player").transform;
-        rb = GetComponent<Rigidbody2D>();  
+        rb = GetComponent<Rigidbody2D>();
+        target_system = GameObject.Find("Targeting_system").GetComponent<Targeting>();
+        enemy_sprite = GetComponent<SpriteRenderer>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -36,13 +40,17 @@ public class Enemy_AI : MonoBehaviour
     }
     public IEnumerator Damage(float damage)
     {
+        enemy_sprite.color = new Color(.75f, 0f, 0f, 1) ;
         yield return new WaitForSeconds(.1f);
         health-= damage;
         if (health <= 0 && gameObject != null)
         {
             Instantiate(experience, transform.position, transform.rotation);
+            target_system.Destoy_target(gameObject);
+            StopAllCoroutines();
             Destroy(gameObject);
         }
+        enemy_sprite.color = new Color(1, 0, 0, 1);
     }
 
     private bool rooted = false;
