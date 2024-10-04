@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8be721de81d48f4b954afdd65392e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 6
   attack_range: 0.1
   attack_speed: 1
   enemy_layer:

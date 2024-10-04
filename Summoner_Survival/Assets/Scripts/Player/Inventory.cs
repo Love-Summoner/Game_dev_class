@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Summon_materials { FEATHER=0, SCALE, BONE}
 
@@ -14,9 +15,11 @@ public class Inventory : MonoBehaviour
 {
     private slot[] inventory = new slot[(int)Summon_materials.BONE + 1];
     public float cur_level = 0, cur_experience = 0, exp_til_level_up = 5;
+    public Slider slider;
 
     private void Start()
     {
+        slider = GameObject.Find("experience_bar").GetComponent<Slider>();
         allocate_inventory();
     }
 
@@ -34,14 +37,16 @@ public class Inventory : MonoBehaviour
     public void level_up(int val)
     {
         cur_experience+=val;
-
+        
         if(cur_experience >= exp_til_level_up)
         {
             change_item_count(UnityEngine.Random.Range(0, (int)Summon_materials.BONE + 1), 1);
             cur_experience = cur_experience - exp_til_level_up;
-            exp_til_level_up += 0;
+            exp_til_level_up += 5;
             cur_level++;
         }
+        
+        slider.value = cur_experience/exp_til_level_up;
     }
     public void change_item_count(int slot_number, int amount)
     {

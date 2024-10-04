@@ -23,36 +23,48 @@ public class Enemy_AI : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (health <= 0)
+            return;
         if (collision.tag == "Player")
         {
             kill_player();
+        }
+        else if(collision.tag == "Player_bullet")
+        {
+            collision.gameObject.GetComponent<Bullet>().Delete_bullet();
+            StartCoroutine(Damage(1));
+            
         }
         else if(collision.tag == "Melee_attack")
         {
             rooted = true;
         }
     }
-    public IEnumerator Damage(float damage)
+    IEnumerator Damage(float damage)
     {
         enemy_sprite.color = new Color(.75f, 0f, 0f, 1) ;
         yield return new WaitForSeconds(.1f);
         health-= damage;
-        if (health <= 0 && gameObject != null)
-        {
-            Instantiate(experience, transform.position, transform.rotation);
-            target_system.Destoy_target(gameObject);
-            StopAllCoroutines();
-            yield return new WaitForEndOfFrame();
-            Destroy(gameObject);
-        }
         enemy_sprite.color = new Color(1, 0, 0, 1);
     }
 
+    public void safe_damage(float i)
+    {
+        StartCoroutine(Damage(i));
+    }
     public bool rooted = false, targeted = false;
     private Vector2 distance = Vector2.zero;
     private void Update()
     {
-        if(rooted)
+        if(!is_dead && health <= 0)
+            die();
+        if (gameObject != null && is_dead)
+        {
+            StopAllCoroutines();
+            Destroy(gameObject);
+            return;
+        }
+        if (rooted)
         {
             rb.velocity = Vector2.zero;
             return;
@@ -63,6 +75,15 @@ public class Enemy_AI : MonoBehaviour
     }
     private void kill_player()
     {
-        Debug.Log("player killed");
+        
+    }
+    private bool is_dead = false;
+    public void die()
+    {
+        if (gameObject == null)
+            return;
+        Instantiate(experience, transform.position, transform.rotation);
+        is_dead = true;
+        StopAllCoroutines();
     }
 }

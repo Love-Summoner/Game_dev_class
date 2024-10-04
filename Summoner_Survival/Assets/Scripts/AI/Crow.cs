@@ -5,7 +5,7 @@ using UnityEngine;
 public class Crow : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
-
+    public int crow_count = 0;
 
     private bool on_cooldown = false;
     private float fire_rate = 2;
@@ -15,7 +15,9 @@ public class Crow : MonoBehaviour
         {
             return;
         }
-        Instantiate(bullet, transform.position, transform.rotation);
+        GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
+        temp.GetComponent<Bullet>().target_number = crow_count;
+        temp.GetComponent<Bullet>().Select_Target();
         StartCoroutine(shoot());
     }
 

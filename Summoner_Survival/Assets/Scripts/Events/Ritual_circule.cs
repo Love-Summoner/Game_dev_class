@@ -42,6 +42,9 @@ public class Ritual_circule : MonoBehaviour
                     case Summon_materials.BONE:
                         spawn_wolf();
                         break;
+                    case Summon_materials.FEATHER:
+                        spawn_crow();
+                        break;
                 }
                 inventory.change_item_count((int)material_request, -material_requirement);
             }
@@ -51,6 +54,29 @@ public class Ritual_circule : MonoBehaviour
     {
         GameObject temp = Instantiate(wolf_prefab, transform.position, Quaternion.identity);
         temp.GetComponent<WolfAI>().wolf_count = material_requirement;
+        material_requirement++;
+    }
+    private void spawn_crow()
+    {
+        GameObject temp = Instantiate(crow_prefab, transform.position, Quaternion.identity);
+        temp.GetComponent<Crow>().crow_count = material_requirement;
+        temp.transform.parent = inventory.gameObject.transform;
+        switch (material_requirement)
+        {
+            case 1:
+                temp.transform.localPosition = new Vector3(0f, .75f, 0);
+                break;
+            case 2:
+                temp.transform.localPosition = new Vector3(-.25f, .55f, 0);
+                break;
+            case 3:
+                temp.transform.localPosition = new Vector3(.5f, .136f, 0);
+                break;
+            case 4:
+                temp.transform.localPosition = new Vector3(-.25f, -.3f, 0);
+                break;
+        }
+        
         material_requirement++;
     }
 }

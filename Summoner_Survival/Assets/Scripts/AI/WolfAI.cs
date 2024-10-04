@@ -101,7 +101,7 @@ public class WolfAI : MonoBehaviour
     IEnumerator attack()
     {
         if(target != null) 
-            StartCoroutine(target.GetComponent<Enemy_AI>().Damage(1));
+            target.GetComponent<Enemy_AI>().safe_damage(1);
         is_attacking = true;
         attack_box.SetActive(true);
         yield return new WaitForSeconds(.05f);

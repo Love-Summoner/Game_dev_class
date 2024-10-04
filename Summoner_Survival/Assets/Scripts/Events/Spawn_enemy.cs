@@ -32,18 +32,15 @@ public class Spawn_enemy : MonoBehaviour
 
         GameObject temp = Instantiate(enemy_prefab, new Vector3(transform.position.x + vector.x*spawn_distance + ((angle < Mathf.PI) ? spawn_distance*2 : 0), transform.position.y + vector.y*spawn_distance, 0), transform.rotation);
         
-        temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().health*=difficulty;
+        temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().health+=difficulty;
     }
     private void increase_difficulty()
     {
-        if(difficulty == 1 || difficulty == 2)
-        {
             if(difficulty_timer > 30)
             {
                 difficulty+=.25f;
                 difficulty_timer = 0;
             }
-        }
     }
     IEnumerator spawn()
     {

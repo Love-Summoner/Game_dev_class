@@ -5,21 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
+    public int target_number = 0;
 
     private GameObject target;
     private Rigidbody2D rb;
 
     private bool firing = false;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Enemy")
-        {
-            StartCoroutine(collision.gameObject.GetComponent<Enemy_AI>().Damage(1));
-            Destroy(gameObject);
-        }
-    }
-    void Awake()
+    public void Select_Target()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
         if (targets.Length == 0)
@@ -27,12 +20,20 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        target = targets[0];
+        else if(targets.Length <= target_number) 
+        {
+            target = targets[0];
+        }
+        else if(targets.Length > target_number) 
+            target = targets[target_number];
 
         rb = GetComponent<Rigidbody2D>();
         firing = true;
     }
-
+    public void Delete_bullet()
+    {
+        Destroy (gameObject);
+    }
     private Vector2 distance = new Vector2();
     void FixedUpdate()
     {

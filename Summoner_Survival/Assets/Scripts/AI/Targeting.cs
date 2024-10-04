@@ -15,7 +15,8 @@ public class Targeting : MonoBehaviour
     }
     public void Destoy_target(GameObject useless)
     {
-        targets.RemoveAt(targets.IndexOf(useless));
+        if(targets.Contains(useless))
+            targets.RemoveAt(targets.IndexOf(useless));
     }
     public GameObject get_target(int i) { return targets.ToArray()[i]; }
 
