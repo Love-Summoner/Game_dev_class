@@ -49,7 +49,7 @@ public class Ritual_circule : MonoBehaviour
     }
     private void spawn_wolf()
     {
-        GameObject temp = Instantiate(wolf_prefab, inventory.gameObject.transform.position, Quaternion.identity);
+        GameObject temp = Instantiate(wolf_prefab, transform.position, Quaternion.identity);
         temp.GetComponent<WolfAI>().wolf_count = material_requirement;
         material_requirement++;
     }

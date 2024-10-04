@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour
         {
             change_item_count(UnityEngine.Random.Range(0, (int)Summon_materials.BONE + 1), 1);
             cur_experience = cur_experience - exp_til_level_up;
-            exp_til_level_up += 10;
+            exp_til_level_up += 0;
             cur_level++;
         }
     }

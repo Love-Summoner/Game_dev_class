@@ -27,11 +27,6 @@ public class Enemy_AI : MonoBehaviour
         {
             kill_player();
         }
-        else if(collision.tag == "Player_bullet")
-        {
-            StartCoroutine(Damage(1));
-            Destroy(collision.gameObject);
-        }
         else if(collision.tag == "Melee_attack")
         {
             collision.gameObject.SetActive(false);
@@ -47,13 +42,13 @@ public class Enemy_AI : MonoBehaviour
         {
             Instantiate(experience, transform.position, transform.rotation);
             target_system.Destoy_target(gameObject);
-            StopAllCoroutines();
+            yield return new WaitForEndOfFrame();
             Destroy(gameObject);
         }
         enemy_sprite.color = new Color(1, 0, 0, 1);
     }
 
-    private bool rooted = false;
+    public bool rooted = false, targeted = false;
     private Vector2 distance = Vector2.zero;
     private void Update()
     {

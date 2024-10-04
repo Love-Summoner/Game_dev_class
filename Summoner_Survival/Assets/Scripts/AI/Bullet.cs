@@ -10,6 +10,15 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
 
     private bool firing = false;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Enemy")
+        {
+            StartCoroutine(collision.gameObject.GetComponent<Enemy_AI>().Damage(1));
+            Destroy(gameObject);
+        }
+    }
     void Awake()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");

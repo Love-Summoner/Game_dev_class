@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawn_enemy : MonoBehaviour
 {
-    [SerializeField] private float spawn_rate = 5, enemy_speed = 2;
+    [SerializeField] private float spawn_rate = 5, enemy_speed = 2, spawn_distance = 10.82f;
     [SerializeField] private GameObject enemy_prefab;
 
     private float difficulty = 1, seconds = 0, difficulty_timer = 0;
@@ -24,8 +24,14 @@ public class Spawn_enemy : MonoBehaviour
         
         StartCoroutine(spawn());
         increase_difficulty();
-        Transform point = transform.GetChild(Random.Range(0, transform.childCount));
-        GameObject temp = Instantiate(enemy_prefab, point.position, point.rotation);
+        
+        float angle = Random.Range(0f, 2 * Mathf.PI);
+        Vector3 vector = new Vector3();
+
+        vector= new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0);
+
+        GameObject temp = Instantiate(enemy_prefab, new Vector3(transform.position.x + vector.x*spawn_distance + ((angle < Mathf.PI) ? spawn_distance*2 : 0), transform.position.y + vector.y*spawn_distance, 0), transform.rotation);
+        
         temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().health*=difficulty;
     }
     private void increase_difficulty()

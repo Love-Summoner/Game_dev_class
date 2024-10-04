@@ -25,7 +25,7 @@ public class WolfAI : MonoBehaviour
 
     private Vector2 distance = Vector2.zero;
     private bool already_searched = false;
-    void FixedUpdate()
+    void Update()
     {
         if (target != null)
         {
@@ -36,7 +36,7 @@ public class WolfAI : MonoBehaviour
         {
             Reset_state();
         }
-        if (!is_targeting && target == null)
+        if (!is_targeting && target == null && target_system.target_exist(wolf_count))
         {
             search_for_target();
             return;
@@ -45,7 +45,7 @@ public class WolfAI : MonoBehaviour
     }
     private void Chase_target()
     {
-        if (Mathf.Abs(distance.x) < attack_range && Mathf.Abs(distance.y) <= 1f)
+        if (Mathf.Abs(distance.x) <= attack_range && Mathf.Abs(distance.y) <= 1f)
         {
             rb.velocity = Vector2.zero;
             if (!is_attacking)
@@ -67,13 +67,13 @@ public class WolfAI : MonoBehaviour
     {
         distance = default_target.transform.position - transform.position;
         
-        if (Mathf.Abs(distance.x) < attack_range && Mathf.Abs(distance.y) <= 1f)
+        if (Mathf.Abs(distance.x) < 1 && Mathf.Abs(distance.y) <= 1f)
         {
             is_targeting = false;
             rb.velocity = Vector2.zero;
             return;
         }
-        if (distance.sqrMagnitude > attack_range)
+        if (distance.sqrMagnitude > 1)
         {
             rb.velocity = distance.normalized * speed;
         }
@@ -87,7 +87,9 @@ public class WolfAI : MonoBehaviour
     {
         if (target_system.target_exist(wolf_count))
         {
-            target = target_system.get_target(wolf_count);
+            target = target_system.wolf_target(0);
+            if (target == null)
+                return;
             is_targeting = true;
         }
     }
