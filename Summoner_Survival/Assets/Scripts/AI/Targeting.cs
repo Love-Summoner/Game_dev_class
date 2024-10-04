@@ -15,7 +15,7 @@ public class Targeting : MonoBehaviour
     }
     public void Destoy_target(GameObject useless)
     {
-        
+        targets.RemoveAt(targets.IndexOf(useless));
     }
     public GameObject get_target(int i) { return targets.ToArray()[i]; }
 
@@ -44,15 +44,20 @@ public class Targeting : MonoBehaviour
         targets.ToArray()[i].GetComponent<Enemy_AI>().targeted = true;
         return targets.ToArray()[i];
     }   
-    private void Update()
+    private void clear_nulls()
     {
-        foreach (GameObject target in targets)
+        if (targets.Count == 0)
+            return;
+        for(int i  = 0; i < targets.Count; i++)
         {
-            if (target == null)
+            if (targets.ToArray()[i] == null)
             {
-                targets.Remove(target);
+                targets.RemoveAt(i);
             }
         }
-
+    }
+    private void Update()
+    {
+        clear_nulls() ;
     }
 }

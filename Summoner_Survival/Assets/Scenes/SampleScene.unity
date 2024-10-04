@@ -13642,7 +13642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &920056301
 Transform:
   m_ObjectHideFlags: 0
@@ -14336,6 +14336,8 @@ MonoBehaviour:
   speed: 1.5
   experience: {fileID: 8376381844132013065, guid: b0b8e3efd8186b54baa70ab0295e447c, type: 3}
   health: 3
+  rooted: 0
+  targeted: 0
 --- !u!61 &1472499930
 BoxCollider2D:
   m_ObjectHideFlags: 0

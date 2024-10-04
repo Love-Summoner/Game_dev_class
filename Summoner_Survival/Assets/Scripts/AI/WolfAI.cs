@@ -34,6 +34,7 @@ public class WolfAI : MonoBehaviour
         }
         else
         {
+            locked_on = false;
             Reset_state();
         }
         if (!is_targeting && target == null && target_system.target_exist(wolf_count))
@@ -43,10 +44,12 @@ public class WolfAI : MonoBehaviour
         }
         
     }
+    private bool locked_on = false;
     private void Chase_target()
     {
-        if (Mathf.Abs(distance.x) <= attack_range && Mathf.Abs(distance.y) <= 1f)
+        if (Mathf.Abs(distance.x) <= attack_range && Mathf.Abs(distance.y) <= 1f || locked_on)
         {
+            locked_on = true;
             rb.velocity = Vector2.zero;
             if (!is_attacking)
                 StartCoroutine(attack());
@@ -101,8 +104,9 @@ public class WolfAI : MonoBehaviour
             StartCoroutine(target.GetComponent<Enemy_AI>().Damage(1));
         is_attacking = true;
         attack_box.SetActive(true);
-        yield return new WaitForSeconds(attack_speed);
+        yield return new WaitForSeconds(.05f);
         attack_box.SetActive(false);
+        yield return new WaitForSeconds(attack_speed);
         is_attacking = false;
         
     }

@@ -29,7 +29,6 @@ public class Enemy_AI : MonoBehaviour
         }
         else if(collision.tag == "Melee_attack")
         {
-            collision.gameObject.SetActive(false);
             rooted = true;
         }
     }
@@ -42,6 +41,7 @@ public class Enemy_AI : MonoBehaviour
         {
             Instantiate(experience, transform.position, transform.rotation);
             target_system.Destoy_target(gameObject);
+            StopAllCoroutines();
             yield return new WaitForEndOfFrame();
             Destroy(gameObject);
         }
