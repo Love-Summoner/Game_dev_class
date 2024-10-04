@@ -82,7 +82,17 @@ public class Enemy_AI : MonoBehaviour
     {
         if (gameObject == null)
             return;
-        Instantiate(experience, transform.position, transform.rotation);
+        GameObject temp = Instantiate(experience, transform.position, transform.rotation);
+        float chance = Random.Range(0f, 1f);
+
+        if (chance >= .90f)
+        {
+            temp.GetComponent<Item>().exp_worth = 5;
+            if(chance >= .99f)
+            {
+                temp.GetComponent<Item>().exp_worth = 10;
+            }
+        }
         is_dead = true;
         StopAllCoroutines();
     }

@@ -34,10 +34,12 @@ public class Spawn_enemy : MonoBehaviour
         
         temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().health+=difficulty;
     }
+    private float next_dif_increase_at = 30;
     private void increase_difficulty()
     {
-            if(difficulty_timer > 30)
+            if(difficulty_timer > next_dif_increase_at)
             {
+                next_dif_increase_at += 5;
                 difficulty+=.25f;
                 difficulty_timer = 0;
             }
