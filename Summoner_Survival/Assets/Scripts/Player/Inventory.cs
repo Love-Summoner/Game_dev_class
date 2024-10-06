@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void level_up(int val)
+    public void level_up(float val)
     {
         cur_experience+=val;
         

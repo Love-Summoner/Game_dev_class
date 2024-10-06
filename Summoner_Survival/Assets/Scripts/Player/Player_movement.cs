@@ -4,15 +4,27 @@ using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player_movement : MonoBehaviour
 {
-    [SerializeField] private float max_speed, start_speed, acceleration;
+    [SerializeField] private float max_speed, start_speed, acceleration, health = 5;
+    private Button_functions button_functions;
+    private GameObject health_bar, bar_tracker;
+    private Camera cam;
+    private Slider slider;
 
     private Rigidbody2D rb;
+    private float max_health;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        button_functions = GameObject.Find("Button_functions").GetComponent<Button_functions>() ;
+        health_bar = GameObject.Find("health_bar");
+        bar_tracker = transform.GetChild(2).gameObject;
+        cam = GameObject.Find("Main Camera").GetComponent<Camera>();
+        slider = health_bar.GetComponent<Slider>();
+        max_health = health;
     }
 
     public float horizontal, vertical;
@@ -21,10 +33,13 @@ public class Player_movement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKeyDown(KeyCode.Return)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            button_functions.pause_game();
         }
+
+        health_bar.transform.position = cam.WorldToScreenPoint(bar_tracker.transform.position);
+        slider.value =  health/max_health;
     }
 
     [SerializeField]private float cur_speed = 0;
@@ -49,6 +64,18 @@ public class Player_movement : MonoBehaviour
         if(cur_speed < acceleration) 
         {
             cur_speed = 0;
+        }
+    }
+    private void die()
+    {
+        button_functions.death();
+    }
+    public void hurt()
+    {
+        health -= Time.deltaTime;
+        if(health <=  0 )
+        {
+            die();
         }
     }
 }

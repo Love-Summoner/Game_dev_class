@@ -10,24 +10,27 @@ public class Enemy_AI : MonoBehaviour
     private Transform player_loc;
     private Rigidbody2D rb;
 
-    public float health = 3;
+    public float health = 3, exp_mod = 0;
     private Targeting target_system;
     private SpriteRenderer enemy_sprite;
+    private Player_movement movement;
 
     private void Start()
     {
         player_loc = GameObject.Find("Player").transform;
+        movement = player_loc.gameObject.GetComponent<Player_movement>();
         rb = GetComponent<Rigidbody2D>();
         target_system = GameObject.Find("Targeting_system").GetComponent<Targeting>();
         enemy_sprite = GetComponent<SpriteRenderer>();
     }
+    private bool hurting_player = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (health <= 0)
             return;
         if (collision.tag == "Player")
         {
-            kill_player();
+            hurting_player = true;
         }
         else if(collision.tag == "Player_bullet")
         {
@@ -38,6 +41,13 @@ public class Enemy_AI : MonoBehaviour
         else if(collision.tag == "Melee_attack")
         {
             rooted = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            hurting_player = false;
         }
     }
     IEnumerator Damage(float damage)
@@ -56,6 +66,10 @@ public class Enemy_AI : MonoBehaviour
     private Vector2 distance = Vector2.zero;
     private void Update()
     {
+        if(hurting_player)
+        {
+            movement.hurt();
+        }
         if(!is_dead && health <= 0)
             die();
         if (gameObject != null && is_dead)
@@ -85,12 +99,13 @@ public class Enemy_AI : MonoBehaviour
         GameObject temp = Instantiate(experience, transform.position, transform.rotation);
         float chance = Random.Range(0f, 1f);
 
+        temp.GetComponent<Item>().exp_worth = 1 + exp_mod;
         if (chance >= .90f)
         {
-            temp.GetComponent<Item>().exp_worth = 5;
+            temp.GetComponent<Item>().exp_worth = (1+exp_mod) * 5;
             if(chance >= .99f)
             {
-                temp.GetComponent<Item>().exp_worth = 10;
+                temp.GetComponent<Item>().exp_worth = (1 + exp_mod) * 10;
             }
         }
         is_dead = true;
