@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39630fe9e664b0946bfb98e832f7bdf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 1.5
   experience: {fileID: 8376381844132013065, guid: b0b8e3efd8186b54baa70ab0295e447c, type: 3}
   health: 3
   exp_mod: 0

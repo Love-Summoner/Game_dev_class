@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Summon_stats : MonoBehaviour
 {
-    public float bullet_damage, bullet_speed, melee_damage, melee_speed;
-    void Start()
+    public float bullet_damage, fire_speed, melee_damage, melee_speed, cool_down = 5, shadow_time = 3, attack_time = 1;
+    
+    public void increase_damage()
     {
-        
+        float temp = bullet_damage;
+        bullet_damage += .5f;
+        melee_damage *= (bullet_damage / temp);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void increase_speed()
     {
-        
+        fire_speed *= .8f;
+        melee_speed *= .8f;
+        cool_down *= .8f;
+        shadow_time *= .8f;
+        attack_time *= .8f;
+        Debug.Log(fire_speed);
     }
 }

@@ -14,14 +14,18 @@ public class Enemy_AI : MonoBehaviour
     private Targeting target_system;
     private SpriteRenderer enemy_sprite;
     private Player_movement movement;
+    private Summon_stats stats;
+    private Main_circle ritual_tracker;
 
     private void Start()
     {
+        stats = GameObject.Find("Summon_stats").GetComponent<Summon_stats>();
         player_loc = GameObject.Find("Player").transform;
         movement = player_loc.gameObject.GetComponent<Player_movement>();
         rb = GetComponent<Rigidbody2D>();
         target_system = GameObject.Find("Targeting_system").GetComponent<Targeting>();
         enemy_sprite = GetComponent<SpriteRenderer>();
+        ritual_tracker = GameObject.Find("Main_circle").GetComponent<Main_circle>();
     }
     private bool hurting_player = false;
 
@@ -32,16 +36,17 @@ public class Enemy_AI : MonoBehaviour
         if (collision.tag == "Player")
         {
             hurting_player = true;
+            ritual();
         }
         else if(collision.tag == "Player_bullet")
         {
             collision.gameObject.GetComponent<Bullet>().Delete_bullet();
-            StartCoroutine(Damage(1));
+            StartCoroutine(Damage(stats.bullet_damage));
             
         }
         else if(collision.tag == "Flame_breath")
         {
-            StartCoroutine(Damage(1));
+            StartCoroutine(Damage(stats.bullet_damage));
         }
         else if (collision.tag == "Melee_attack")
         {
@@ -79,6 +84,7 @@ public class Enemy_AI : MonoBehaviour
         if (gameObject != null && is_dead)
         {
             StopAllCoroutines();
+            ritual();
             Destroy(transform.parent.gameObject);
             return;
         }
@@ -111,5 +117,19 @@ public class Enemy_AI : MonoBehaviour
         }
         is_dead = true;
         StopAllCoroutines();
+    }
+    private void ritual()
+    {
+        if (ritual_tracker.Ritual_being_done)
+        {
+            if (ritual_tracker.count_kills)
+            {
+                ritual_tracker.add_kill();
+            }
+            else
+            {
+                ritual_tracker.was_hit = true;
+            }
+        }
     }
 }

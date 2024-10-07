@@ -15,8 +15,11 @@ public class WolfAI : MonoBehaviour
     private GameObject target;
     private Targeting target_system;
 
-    void Start()
+    private Summon_stats stats;
+
+    private void Start()
     {
+        stats = GameObject.Find("Summon_stats").GetComponent<Summon_stats>();
         rb = GetComponent<Rigidbody2D>();
         attack_box = transform.GetChild(0).gameObject;
         default_target = GameObject.Find("Player");
@@ -101,12 +104,12 @@ public class WolfAI : MonoBehaviour
     IEnumerator attack()
     {
         if(target != null) 
-            target.GetComponent<Enemy_AI>().safe_damage(1);
+            target.GetComponent<Enemy_AI>().safe_damage(stats.melee_damage);
         is_attacking = true;
         attack_box.SetActive(true);
         yield return new WaitForSeconds(.05f);
         attack_box.SetActive(false);
-        yield return new WaitForSeconds(attack_speed);
+        yield return new WaitForSeconds(stats.melee_speed);
         is_attacking = false;
         
     }

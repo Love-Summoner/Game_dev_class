@@ -8,7 +8,12 @@ public class Crow : MonoBehaviour
     public int crow_count = 0;
 
     private bool on_cooldown = false;
-    private float fire_rate = 2;
+    private Summon_stats stats;
+
+    private void Start()
+    {
+        stats = GameObject.Find("Summon_stats").GetComponent<Summon_stats>();
+    }
     void Update()
     {
         if(on_cooldown)
@@ -24,7 +29,7 @@ public class Crow : MonoBehaviour
     IEnumerator shoot()
     {
         on_cooldown=true;
-        yield return new WaitForSeconds(fire_rate);
+        yield return new WaitForSeconds(stats.fire_speed);
         on_cooldown=false;
     }
 }

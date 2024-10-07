@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Dragon : MonoBehaviour
 {
-    [SerializeField] private float cool_down = 5, shadow_time = 3, attack_time = 1;
     private GameObject shadow, breath, target;
     private Targeting target_system;
+    private Summon_stats stats;
 
-    void Start()
+    private void Start()
     {
+        stats = GameObject.Find("Summon_stats").GetComponent<Summon_stats>();
         shadow = transform.GetChild(0).gameObject;
         breath = transform.GetChild(1).gameObject;
         target_system = GameObject.Find("Targeting_system").GetComponent<Targeting>();
@@ -41,12 +42,12 @@ public class Dragon : MonoBehaviour
     {
         on_cool_down = true;
         prepping_attack = true;
-        yield return new WaitForSeconds(cool_down);
+        yield return new WaitForSeconds(stats.cool_down);
         prepping_attack = false;
         shadow.SetActive(true);
-        yield return new WaitForSeconds(shadow_time);
+        yield return new WaitForSeconds(stats.shadow_time);
         breath.SetActive(true);
-        yield return new WaitForSeconds(attack_time);
+        yield return new WaitForSeconds(stats.attack_time);
         breath.SetActive(false);
         shadow.SetActive(false);
         on_cool_down = false;
