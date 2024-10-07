@@ -52,7 +52,8 @@ public class Inventory : MonoBehaviour
     {
         if (inventory[slot_number].count + amount >= 0)
             inventory[slot_number].count += amount;
-        Debug.Log(inventory[slot_number].material);
+        if(amount > 0)
+            Debug.Log(inventory[slot_number].material);
     }
     public int get_item_count(int slot_number)
     {

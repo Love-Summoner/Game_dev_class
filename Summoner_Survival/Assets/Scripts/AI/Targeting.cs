@@ -57,6 +57,12 @@ public class Targeting : MonoBehaviour
             }
         }
     }
+    public GameObject random_target()
+    {
+        if (targets.Count == 0)
+            return null;
+        return targets[Random.Range(0, targets.Count)] ;
+    }
     private void Update()
     {
         clear_nulls() ;

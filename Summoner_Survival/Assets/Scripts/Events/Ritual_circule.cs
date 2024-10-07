@@ -5,13 +5,14 @@ using UnityEngine;
 public class Ritual_circule : MonoBehaviour
 {
     [SerializeField]private Summon_materials material_request = Summon_materials.BONE;
-    [SerializeField] private GameObject crow_prefab, wolf_prefab;
+    [SerializeField] private GameObject crow_prefab, wolf_prefab, dragon_prefab;
     public int material_requirement = 1;
     private Inventory inventory;
-
+    private Transform crow_holder;
     private void Start()
     {
         inventory = GameObject.Find("Player").GetComponent<Inventory>();
+        crow_holder = inventory.gameObject.transform.GetChild(0);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -45,6 +46,9 @@ public class Ritual_circule : MonoBehaviour
                     case Summon_materials.FEATHER:
                         spawn_crow();
                         break;
+                    case Summon_materials.SCALE:
+                        spawn_dragon();
+                        break;
                 }
                 inventory.change_item_count((int)material_request, -material_requirement);
             }
@@ -60,23 +64,31 @@ public class Ritual_circule : MonoBehaviour
     {
         GameObject temp = Instantiate(crow_prefab, transform.position, Quaternion.identity);
         temp.GetComponent<Crow>().crow_count = material_requirement;
-        temp.transform.parent = inventory.gameObject.transform;
-        switch (material_requirement)
+        temp.transform.parent = crow_holder;
+
+        float rad_increment = (Mathf.PI * 2)/crow_holder.childCount;
+        float angle = 0;
+
+        foreach(Transform crow in crow_holder)
         {
-            case 1:
-                temp.transform.localPosition = new Vector3(0f, .75f, 0);
-                break;
-            case 2:
-                temp.transform.localPosition = new Vector3(-.25f, .55f, 0);
-                break;
-            case 3:
-                temp.transform.localPosition = new Vector3(.5f, .136f, 0);
-                break;
-            case 4:
-                temp.transform.localPosition = new Vector3(-.25f, -.3f, 0);
-                break;
+            crow.localPosition = angular_posion(angle, .4f);
+            crow.localScale = new Vector2(.4f, .4f);
+            angle += rad_increment;
         }
-        
         material_requirement++;
+    }
+    private void spawn_dragon()
+    {
+        GameObject temp = Instantiate(dragon_prefab, transform.position, Quaternion.identity);
+        material_requirement++;
+    }
+    private Vector2 angular_posion(float cur_angle, float radius)
+    {
+        float x_pos = radius * Mathf.Cos(cur_angle);
+        float y_pos = radius * Mathf.Sin(cur_angle);
+
+
+
+        return new Vector2(x_pos, y_pos);
     }
 }

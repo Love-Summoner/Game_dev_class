@@ -24,7 +24,6 @@ public class WolfAI : MonoBehaviour
     }
 
     private Vector2 distance = Vector2.zero;
-    private bool already_searched = false;
     void Update()
     {
         if (target != null)
@@ -53,6 +52,7 @@ public class WolfAI : MonoBehaviour
             rb.velocity = Vector2.zero;
             if (!is_attacking)
                 StartCoroutine(attack());
+            target.GetComponent<Enemy_AI>().rooted = true;
             return;
             
         }

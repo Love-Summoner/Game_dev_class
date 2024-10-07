@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class Player_movement : MonoBehaviour
 {
     [SerializeField] private float max_speed, start_speed, acceleration, health = 5;
+    [SerializeField]private bool immortal = false;
+
     private Button_functions button_functions;
     private GameObject health_bar, bar_tracker;
     private Camera cam;
@@ -72,6 +74,8 @@ public class Player_movement : MonoBehaviour
     }
     public void hurt()
     {
+        if (immortal)
+            return;
         health -= Time.deltaTime;
         if(health <=  0 )
         {

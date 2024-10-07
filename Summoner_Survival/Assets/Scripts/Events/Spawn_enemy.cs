@@ -58,9 +58,21 @@ public class Spawn_enemy : MonoBehaviour
 
         vector = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0);
 
-        GameObject temp = Instantiate(enemy_prefab, new Vector3(transform.position.x + vector.x * spawn_distance + ((angle < Mathf.PI) ? spawn_distance * 2 : 0), transform.position.y + vector.y * spawn_distance, 0), transform.rotation);
-
+        GameObject temp = Instantiate(enemy_prefab, angular_posion(angle, spawn_distance) + transform.position, transform.rotation);
+        
         temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().health += difficulty;
         temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().exp_mod = difficulty;
+    }
+    private Vector3 angular_posion(float cur_angle, float radius)
+    {
+        float x_pos = radius * Mathf.Cos(cur_angle) + radius;
+        float y_pos = radius * Mathf.Sin(cur_angle);
+
+        if(cur_angle <= Mathf.PI/2 || cur_angle >= (Mathf.PI*3)/2) 
+        {
+            x_pos += radius;
+        }
+
+        return new Vector2(x_pos, y_pos);
     }
 }

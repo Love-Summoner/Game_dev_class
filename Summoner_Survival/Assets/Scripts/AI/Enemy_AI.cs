@@ -24,6 +24,7 @@ public class Enemy_AI : MonoBehaviour
         enemy_sprite = GetComponent<SpriteRenderer>();
     }
     private bool hurting_player = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (health <= 0)
@@ -38,9 +39,13 @@ public class Enemy_AI : MonoBehaviour
             StartCoroutine(Damage(1));
             
         }
-        else if(collision.tag == "Melee_attack")
+        else if(collision.tag == "Flame_breath")
         {
-            rooted = true;
+            StartCoroutine(Damage(1));
+        }
+        else if (collision.tag == "Melee_attack")
+        {
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -57,7 +62,6 @@ public class Enemy_AI : MonoBehaviour
         health-= damage;
         enemy_sprite.color = new Color(1, 0, 0, 1);
     }
-
     public void safe_damage(float i)
     {
         StartCoroutine(Damage(i));
@@ -75,7 +79,7 @@ public class Enemy_AI : MonoBehaviour
         if (gameObject != null && is_dead)
         {
             StopAllCoroutines();
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
             return;
         }
         if (rooted)
@@ -87,10 +91,7 @@ public class Enemy_AI : MonoBehaviour
 
         rb.velocity = distance.normalized * speed;
     }
-    private void kill_player()
-    {
-        
-    }
+
     private bool is_dead = false;
     public void die()
     {
