@@ -5,6 +5,7 @@ using UnityEngine;
 public class Fill_spot : MonoBehaviour
 {
     public STAT_TYPE type = STAT_TYPE.SPEED;
+    public Sprite[] item_sprites = new Sprite[3];
     private Main_circle circle;
     private Inventory inventory;
 
