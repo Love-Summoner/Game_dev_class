@@ -15,7 +15,7 @@ public class visualize_inventory : MonoBehaviour
 
     public void change_slot_icon(int i)
     {
-        numbers[i].text = inventory.get_item_count(i).ToString();
+        numbers[i].text = inventory.inventory[i].count.ToString();
         icons[i].sprite = sprites[i];
     }
 }
