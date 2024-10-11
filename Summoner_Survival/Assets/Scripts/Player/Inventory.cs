@@ -13,12 +13,15 @@ public struct slot
 }
 public class Inventory : MonoBehaviour
 {
-    private slot[] inventory = new slot[(int)Summon_materials.BONE + 1];
+    public slot[] inventory = new slot[(int)Summon_materials.BONE + 1];
     public float cur_level = 0, cur_experience = 0, exp_til_level_up = 5;
     public Slider slider;
 
+    private visualize_inventory vis;
+
     private void Start()
     {
+        vis = GameObject.Find("inventory").GetComponent<visualize_inventory>() ;
         slider = GameObject.Find("experience_bar").GetComponent<Slider>();
         allocate_inventory();
     }
@@ -51,9 +54,10 @@ public class Inventory : MonoBehaviour
     public void change_item_count(int slot_number, int amount)
     {
         if (inventory[slot_number].count + amount >= 0)
+        {
             inventory[slot_number].count += amount;
-        if(amount > 0)
-            Debug.Log(inventory[slot_number].material);
+            vis.change_slot_icon(slot_number);
+        }
     }
     public int get_item_count(int slot_number)
     {

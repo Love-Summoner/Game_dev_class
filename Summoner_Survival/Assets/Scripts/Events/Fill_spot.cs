@@ -22,6 +22,7 @@ public class Fill_spot : MonoBehaviour
         {
             circle.Fill_item();
             inventory.change_item_count((int)type, -1);
+            transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = item_sprites[(int)type];
         }
     }
     private bool interractable = false;
