@@ -25,6 +25,7 @@ public class Main_circle : MonoBehaviour
 
         current_ritual = type;
         Ritual_being_done = true;
+        set_circles();
     }
     public bool Ritual_being_done;
     private int kill_requirement = 10, cur_kills = 0;
@@ -130,11 +131,15 @@ public class Main_circle : MonoBehaviour
     }
     private void spawn_fill_points()
     {
-        GameObject temp = Instantiate(fill_spot, transform.position, transform.rotation);
-        temp.transform.parent = sacrifices.transform;
-        if(item_requirement == 1 || item_requirement == 5)
+        
+        if(item_requirement == 5)
         {
-            return;
+            
+        }
+        else
+        {
+            GameObject temp = Instantiate(fill_spot, transform.position, transform.rotation);
+            temp.transform.parent = sacrifices.transform;
         }
 
         float angle = (Mathf.PI * 2)/sacrifices.transform.childCount;
@@ -143,6 +148,7 @@ public class Main_circle : MonoBehaviour
         {
             t.localPosition = angular_position(cur_angle, .435f);
             cur_angle += angle;
+            t.GetComponent<Fill_spot>().reset_circle();
         }
     }
     private Vector2 angular_position(float cur_angle, float radius)
@@ -153,5 +159,12 @@ public class Main_circle : MonoBehaviour
 
 
         return new Vector2(x_pos, y_pos);
+    }
+    private void set_circles()
+    {
+        foreach (Transform t in sacrifices.transform)
+        {
+            t.GetComponent<Fill_spot>().set_circle();
+        }
     }
 }

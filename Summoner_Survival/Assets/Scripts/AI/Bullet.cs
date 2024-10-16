@@ -48,4 +48,8 @@ public class Bullet : MonoBehaviour
             rb.velocity = distance.normalized * speed;
         }
     }
+    private void Update()
+    {
+        transform.right = rb.velocity.normalized;
+    }
 }
