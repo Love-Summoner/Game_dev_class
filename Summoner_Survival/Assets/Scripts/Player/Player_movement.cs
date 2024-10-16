@@ -8,8 +8,9 @@ using UnityEngine.UI;
 
 public class Player_movement : MonoBehaviour
 {
-    [SerializeField] private float max_speed, start_speed, acceleration, health = 5;
+    [SerializeField] private float max_speed, start_speed, acceleration;
     [SerializeField]private bool immortal = false;
+    public float health = 5;
 
     private Button_functions button_functions;
     private GameObject health_bar, bar_tracker;

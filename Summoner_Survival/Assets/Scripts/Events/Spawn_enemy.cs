@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Spawn_enemy : MonoBehaviour
 {
     [SerializeField] private float spawn_rate = 5, enemy_speed = 2, spawn_distance = 10.82f;
     [SerializeField] private GameObject enemy_prefab;
+    public TMP_Text clock_text;
 
     private float difficulty = 1, seconds = 0, difficulty_timer = 0;
     private float enemy_count = 5;
@@ -14,9 +16,12 @@ public class Spawn_enemy : MonoBehaviour
         
     }
     private bool on_cooldown = false;
-    // Update is called once per frame
+    private float time = 0;
+    // Update is called once per frame ((int)(time % 60)).ToString()
     void Update()
     {
+        time += Time.deltaTime;
+        clock_text.text = Mathf.Floor(time/60).ToString() + ":" + ((time%60 < 10) ? "0" + ((int)(time % 60)).ToString() : ((int)(time % 60)).ToString());
         seconds += Time.deltaTime;
         difficulty_timer += Time.deltaTime;
 

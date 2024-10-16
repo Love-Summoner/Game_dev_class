@@ -126,7 +126,7 @@ public class Enemy_AI : MonoBehaviour
             {
                 ritual_tracker.add_kill();
             }
-            else
+            else if(ritual_tracker.current_ritual == STAT_TYPE.SPEED)
             {
                 ritual_tracker.was_hit = true;
             }

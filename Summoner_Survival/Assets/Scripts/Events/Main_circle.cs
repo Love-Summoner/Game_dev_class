@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Main_circle : MonoBehaviour
 {
     [SerializeField] GameObject fill_spot;
+    public TMP_Text instructions_UI;
 
     private GameObject selection, sacrifices;
-    private STAT_TYPE current_ritual;
+    public STAT_TYPE current_ritual;
     private Summon_stats stats;
     private float surivival_time = 12;
 
+    private string[] ritual_instructions = new string[3];
+    private Player_movement mov;
     private void Start()
     {
+        mov = GameObject.Find("Player").GetComponent<Player_movement>();
+        ritual_instructions[0] = "Don't Get Hit\n" + (surivival_time - cur_time) + "Seconds left";
+        ritual_instructions[1] = "Kill enemies while in the circle:\t\t" + (kill_requirement - cur_kills).ToString("0.00") + " remaining";
         stats = GameObject.Find("Summon_stats").GetComponent<Summon_stats>();
         selection = transform.GetChild(0).gameObject;
         sacrifices = transform.GetChild(1).gameObject;
@@ -24,7 +31,6 @@ public class Main_circle : MonoBehaviour
         selection.SetActive(false);
 
         current_ritual = type;
-        Ritual_being_done = true;
         set_circles();
     }
     public bool Ritual_being_done;
@@ -32,7 +38,7 @@ public class Main_circle : MonoBehaviour
     public bool count_kills = false, was_hit = false;
     void Update()
     {
-        if(!Ritual_being_done || !requirement_met)
+        if(!Ritual_being_done)
         {
             return;
         }
@@ -40,9 +46,11 @@ public class Main_circle : MonoBehaviour
         switch (current_ritual)
         {
             case STAT_TYPE.SPEED:
+                instructions_UI.text = "Don't Get Hit\n" + (surivival_time - cur_time).ToString("0.00") + "Seconds left";
                 speed_ritual();
                 break;
             case STAT_TYPE.POWER:
+                instructions_UI.text = "Kill enemies while in the circle:\t\t" + (kill_requirement - cur_kills).ToString() + " remaing";
                 count_kills = true;
                 power_ritual();
                 break;
@@ -69,7 +77,7 @@ public class Main_circle : MonoBehaviour
     private float cur_time = 0;
     private void speed_ritual()
     {
-        if(was_hit)
+        if(mov.health < starting_health)
         {
             end_ritual();
         }
@@ -81,12 +89,15 @@ public class Main_circle : MonoBehaviour
             end_ritual();
         }
     }
+    private bool max_requirement = false;
+    private float starting_health;
     private void end_ritual()
     {
-        requirement_met = false;
-        count_kills = true;
+        instructions_UI.text = "";
+        count_kills = false;
         Ritual_being_done = false;
         cur_kills = 0;
+        cur_time = 0;
         was_hit = false;
         selection.SetActive(true);
         spawn_fill_points();
@@ -117,7 +128,7 @@ public class Main_circle : MonoBehaviour
         }
     }
     private int item_count = 0, item_requirement = 1;
-    private bool requirement_met = false;
+
     public void Fill_item()
     {
         item_count++;
@@ -126,17 +137,20 @@ public class Main_circle : MonoBehaviour
             item_count = 0;
             if (item_requirement < 5)
                 item_requirement++;
-            requirement_met = true;
+            Ritual_being_done = true;
+            starting_health = mov.health;
         }
     }
     private void spawn_fill_points()
     {
         
-        if(item_requirement == 5)
+        if(item_requirement == 5 && !max_requirement)
         {
-            
+            max_requirement = true;
+            GameObject temp = Instantiate(fill_spot, transform.position, transform.rotation);
+            temp.transform.parent = sacrifices.transform;
         }
-        else
+        else if(!max_requirement)
         {
             GameObject temp = Instantiate(fill_spot, transform.position, transform.rotation);
             temp.transform.parent = sacrifices.transform;

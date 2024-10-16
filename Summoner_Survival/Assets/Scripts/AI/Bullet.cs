@@ -9,9 +9,13 @@ public class Bullet : MonoBehaviour
 
     private GameObject target;
     private Rigidbody2D rb;
+    private Transform player_transform;
 
     private bool firing = false;
-
+    private void Start()
+    {
+        player_transform = GameObject.Find("Player").transform;
+    }
     public void Select_Target()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
@@ -37,10 +41,16 @@ public class Bullet : MonoBehaviour
     private Vector2 distance = new Vector2();
     void FixedUpdate()
     {
+        distance = player_transform.position - transform.position;
         if (!firing)
             return;
         if (target == null)
-            Destroy(gameObject);
+        {
+            if (distance.sqrMagnitude > 15)
+                Destroy(gameObject);
+            else
+                return;
+        }
         if (target != null)
         { 
             distance = target.transform.position - transform.position;
