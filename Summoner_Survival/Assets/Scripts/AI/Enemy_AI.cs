@@ -16,6 +16,7 @@ public class Enemy_AI : MonoBehaviour
     private Player_movement movement;
     private Summon_stats stats;
     private Main_circle ritual_tracker;
+    public float base_exp = 1;
 
     private void Start()
     {

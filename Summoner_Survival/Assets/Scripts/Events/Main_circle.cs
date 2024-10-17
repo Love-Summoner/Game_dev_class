@@ -55,6 +55,8 @@ public class Main_circle : MonoBehaviour
                 power_ritual();
                 break;
             case STAT_TYPE.GROWTH:
+                instructions_UI.text = "Collect experience:\n" + (required_exp-cur_exp).ToString("0");
+                growth_ritual();
                 break;
         }
     }
@@ -86,6 +88,21 @@ public class Main_circle : MonoBehaviour
         {
             up_difficulty();
             stats.increase_speed();
+            end_ritual();
+        }
+    }
+    public float cur_exp = 0, required_exp = 20;
+    private void growth_ritual()
+    {
+        if(cur_exp >= required_exp)
+        {
+            foreach(GameObject t in GameObject.FindGameObjectsWithTag("Experience"))
+            {
+                t.GetComponent<Item>().is_interacting = true;
+            }
+            GameObject.Find("Enemy_spawn_points").GetComponent<Spawn_enemy>().exp_multiplier += .5f;
+            up_difficulty();
+            cur_exp = 0;
             end_ritual();
         }
     }
@@ -125,6 +142,7 @@ public class Main_circle : MonoBehaviour
         {
             surivival_time += 12;
             kill_requirement += 5;
+            required_exp += 20;
         }
     }
     private int item_count = 0, item_requirement = 1;

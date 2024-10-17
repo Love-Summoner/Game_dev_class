@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Spawn_enemy : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class Spawn_enemy : MonoBehaviour
     {
             if(difficulty_timer > next_dif_increase_at)
             {
-                next_dif_increase_at += 5;
+                //next_dif_increase_at += 5;
                 difficulty+=.25f;
                 difficulty_timer = 0;
                 enemy_count++;
@@ -56,6 +57,7 @@ public class Spawn_enemy : MonoBehaviour
         yield return new WaitForSeconds(spawn_rate/difficulty);
         on_cooldown = false;
     }
+    public float exp_multiplier = 1;
     private void spawn_enemy()
     {
         float angle = Random.Range(0f, 2 * Mathf.PI);
@@ -66,7 +68,7 @@ public class Spawn_enemy : MonoBehaviour
         GameObject temp = Instantiate(enemy_prefab, angular_posion(angle, spawn_distance) + transform.position, transform.rotation);
         
         temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().health += difficulty;
-        temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().exp_mod = difficulty;
+        temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().exp_mod = difficulty * exp_multiplier;
     }
     private Vector3 angular_posion(float cur_angle, float radius)
     {

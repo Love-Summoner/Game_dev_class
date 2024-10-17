@@ -13,6 +13,13 @@ public class Targeting : MonoBehaviour
             targets.Add(collision.gameObject);
         }
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+            targets.Remove(collision.gameObject);
+        }
+    }
     public void Destoy_target(GameObject useless)
     {
         if(targets.Contains(useless))
