@@ -29,6 +29,7 @@ public class WolfAI : MonoBehaviour
     private Vector2 distance = Vector2.zero;
     void Update()
     {
+        speed = stats.wolf_move_speed;
         if (target != null)
         {
             distance = target.transform.position - transform.position;

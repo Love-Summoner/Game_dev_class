@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Summon_stats : MonoBehaviour
 {
-    public float bullet_damage, fire_speed, melee_damage, melee_speed, cool_down = 5, shadow_time = 3, attack_time = 1;
+    public float bullet_damage, fire_speed, melee_damage, melee_speed, cool_down = 5, shadow_time = 3, attack_time = 1, wolf_move_speed = 5;
     
     public void increase_damage()
     {
@@ -19,6 +19,6 @@ public class Summon_stats : MonoBehaviour
         cool_down *= .8f;
         shadow_time *= .8f;
         attack_time *= .8f;
-        Debug.Log(fire_speed);
+        wolf_move_speed *= 1.2f;
     }
 }

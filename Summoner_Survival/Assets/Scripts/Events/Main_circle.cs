@@ -103,7 +103,7 @@ public class Main_circle : MonoBehaviour
             {
                 t.GetComponent<Item>().is_interacting = true;
             }
-            GameObject.Find("Enemy_spawn_points").GetComponent<Spawn_enemy>().exp_multiplier += .5f;
+            GameObject.Find("Enemy_spawn_points").GetComponent<Spawn_enemy>().exp_multiplier += .1f;
             stat_numbers[2].text = (System.Int32.Parse(stat_numbers[2].text) + 1).ToString();
             up_difficulty();
             cur_exp = 0;

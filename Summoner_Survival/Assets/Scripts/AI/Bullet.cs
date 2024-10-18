@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
     public int target_number = 0;
+    private Targeting targeting_system;
 
     private GameObject target;
     private Rigidbody2D rb;
@@ -15,6 +16,8 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         player_transform = GameObject.Find("Player").transform;
+        targeting_system = GameObject.Find("Targeting_system").GetComponent<Targeting>();
+        Select_Target();
     }
     public void Select_Target()
     {
@@ -29,7 +32,7 @@ public class Bullet : MonoBehaviour
             target = targets[Random.Range(0, targets.Length)];
         }
         else if(targets.Length > target_number) 
-            target = targets[target_number];
+            target = targets[Random.Range(0, targets.Length)];
 
         rb = GetComponent<Rigidbody2D>();
         firing = true;

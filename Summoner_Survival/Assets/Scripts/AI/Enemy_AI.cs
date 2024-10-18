@@ -17,6 +17,7 @@ public class Enemy_AI : MonoBehaviour
     private Summon_stats stats;
     private Main_circle ritual_tracker;
     public float base_exp = 1;
+    public float probability_mod = 0;
 
     private void Start()
     {
@@ -108,12 +109,24 @@ public class Enemy_AI : MonoBehaviour
         float chance = Random.Range(0f, 1f);
 
         temp.GetComponent<Item>().exp_worth = 1 + exp_mod;
-        if (chance >= .90f)
+        if (chance >= .90f - probability_mod)
         {
             temp.GetComponent<Item>().exp_worth = (1+exp_mod) * 5;
-            if(chance >= .99f)
+            temp.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1);
+            if (chance >= .99f- probability_mod / 2)
             {
                 temp.GetComponent<Item>().exp_worth = (1 + exp_mod) * 10;
+                temp.GetComponent<SpriteRenderer>().color = new Color(1, 0, .894f);
+                if(chance >= 1 -probability_mod / 10)
+                {
+                    temp.GetComponent<Item>().exp_worth = (1 + exp_mod) * 30;
+                    temp.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0);
+                }
+                if (chance >= 1.02 - probability_mod / 10)
+                {
+                    temp.GetComponent<Item>().exp_worth = (1 + exp_mod) * 100;
+                    temp.GetComponent<SpriteRenderer>().color = new Color(1, .858f, .24f);
+                }
             }
         }
         is_dead = true;

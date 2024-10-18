@@ -49,11 +49,12 @@ public class Spawn_enemy : MonoBehaviour
                 difficulty+=.25f;
                 difficulty_timer = 0;
                 enemy_count++;
+                if(time %240  < 20)
+                {
+                    spawn_rate *=.66f;
+                }
             }
-            if(time %240  < 20)
-        {
-            spawn_rate /= 2;
-        }
+            
     }
     IEnumerator spawn()
     {
@@ -73,6 +74,7 @@ public class Spawn_enemy : MonoBehaviour
         
         temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().health += difficulty;
         temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().exp_mod = difficulty * exp_multiplier;
+        temp.transform.GetChild(0).gameObject.GetComponent<Enemy_AI>().probability_mod = exp_multiplier - 1;
     }
     private Vector3 angular_posion(float cur_angle, float radius)
     {

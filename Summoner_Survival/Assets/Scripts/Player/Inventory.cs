@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class Inventory : MonoBehaviour
     public slot[] inventory = new slot[(int)Summon_materials.BONE + 1];
     public float cur_level = 0, cur_experience = 0, exp_til_level_up = 5;
     public Slider slider;
+    public TMP_Text level_counter;
 
     private visualize_inventory vis;
 
@@ -36,10 +38,12 @@ public class Inventory : MonoBehaviour
             i++;
         }
     }
-
+    private int level = 1;
     public void level_up(float val)
     {
         cur_experience+=val;
+        level++;
+        level_counter.text = "Level " + level.ToString();
         
         if(cur_experience >= exp_til_level_up)
         {
