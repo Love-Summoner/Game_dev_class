@@ -9,6 +9,7 @@ TagManager:
   - Melee_attack
   - Flame_breath
   - Experience
+  - Ally
   layers:
   - Default
   - TransparentFX

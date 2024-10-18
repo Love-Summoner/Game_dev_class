@@ -22,9 +22,16 @@ public class Item : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            if(exp_worth == 0)
+            {
+                player_inventory.change_item_count((int)material_type, 1);
+                Destroy(gameObject);
+                return;
+            }
             if(circle.Ritual_being_done && circle.current_ritual == STAT_TYPE.GROWTH)
             {
                 circle.cur_exp += exp_worth;
+                return;
             }
             player_inventory.level_up(exp_worth);
 

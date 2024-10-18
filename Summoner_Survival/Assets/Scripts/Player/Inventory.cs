@@ -39,18 +39,23 @@ public class Inventory : MonoBehaviour
         }
     }
     private int level = 1;
+    private float exp_increment = 3;
     public void level_up(float val)
     {
         cur_experience+=val;
-        level++;
-        level_counter.text = "Level " + level.ToString();
         
         if(cur_experience >= exp_til_level_up)
         {
+            level++;
+            level_counter.text = "Level " + level.ToString();
             change_item_count(UnityEngine.Random.Range(0, (int)Summon_materials.BONE + 1), 1);
             cur_experience = cur_experience - exp_til_level_up;
-            exp_til_level_up += 3;
+            exp_til_level_up += exp_increment;
             cur_level++;
+            if(cur_level % 10 == 0)
+            {
+                exp_increment *= 2;
+            }
         }
         
         slider.value = cur_experience/exp_til_level_up;
