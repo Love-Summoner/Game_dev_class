@@ -208,6 +208,9 @@ MonoBehaviour:
   experience: {fileID: 8376381844132013065, guid: b0b8e3efd8186b54baa70ab0295e447c, type: 3}
   health: 3
   exp_mod: 0
+  base_exp: 1
+  probability_mod: 0
+  health_sprite: {fileID: 21300000, guid: 6f29eb068cf799544a57bec548ccc1a9, type: 3}
   rooted: 0
   targeted: 0
 --- !u!1 &8294488575403551412

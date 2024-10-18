@@ -18,6 +18,7 @@ public class Enemy_AI : MonoBehaviour
     private Main_circle ritual_tracker;
     public float base_exp = 1;
     public float probability_mod = 0;
+    public Sprite health_sprite;
 
     private void Start()
     {
@@ -127,6 +128,12 @@ public class Enemy_AI : MonoBehaviour
                     temp.GetComponent<Item>().exp_worth = (1 + exp_mod) * 100;
                     temp.GetComponent<SpriteRenderer>().color = new Color(1, .858f, .24f);
                 }
+            }
+            if(chance > .995)
+            {
+                temp.GetComponent<Item>().is_health = true;
+                temp.GetComponent<SpriteRenderer>().sprite = health_sprite;
+                temp.GetComponent<SpriteRenderer>().color = Color.white;
             }
         }
         is_dead = true;

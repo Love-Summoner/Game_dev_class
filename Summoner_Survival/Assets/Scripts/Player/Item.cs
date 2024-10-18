@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
     private Transform player_loc;
     private Inventory player_inventory;
     private Main_circle circle;
+    public bool is_health = false;
 
     private void Start()
     {
@@ -22,6 +23,11 @@ public class Item : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            if (is_health)
+            {
+                collision.gameObject.GetComponent<Player_movement>().heal();
+                return;
+            }
             if(exp_worth == 0)
             {
                 player_inventory.change_item_count((int)material_type, 1);

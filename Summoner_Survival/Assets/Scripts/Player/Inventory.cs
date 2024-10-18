@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
         {
             level++;
             level_counter.text = "Level " + level.ToString();
-            change_item_count(UnityEngine.Random.Range(0, (int)Summon_materials.BONE + 1), 1);
+            change_item_count(get_random_item(), 1);
             cur_experience = cur_experience - exp_til_level_up;
             exp_til_level_up += exp_increment;
             cur_level++;
@@ -71,5 +71,21 @@ public class Inventory : MonoBehaviour
     public int get_item_count(int slot_number)
     {
         return inventory[slot_number].count;
+    }
+    private int[] in_a_rows = { 0,0,0};
+    private int get_random_item()
+    {
+        int ran = UnityEngine.Random.Range(0, (int)Summon_materials.BONE + 1);
+        while (in_a_rows[ran] > 0)
+        {
+            ran = UnityEngine.Random.Range(0, (int)Summon_materials.BONE + 1);
+            if(in_a_rows[ran] > 0)
+            {
+                in_a_rows[ran]--;
+            }
+        }
+
+        in_a_rows[ran]++;
+        return ran;
     }
 }

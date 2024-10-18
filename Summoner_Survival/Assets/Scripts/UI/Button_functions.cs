@@ -8,8 +8,11 @@ public class Button_functions : MonoBehaviour
     private GameObject pause_menu, death_screen;
     void Start()
     {
-        pause_menu = GameObject.Find("Pause_menu").transform.GetChild(0).gameObject;
-        death_screen = GameObject.Find("Death Screen").transform.GetChild(0).gameObject;
+        if(GameObject.Find("Pause_menu") != null)
+            pause_menu = GameObject.Find("Pause_menu").transform.GetChild(0).gameObject;
+
+        if(GameObject.Find("Death Screen") != null)
+            death_screen = GameObject.Find("Death Screen").transform.GetChild(0).gameObject;
         Time.timeScale = 1;
     }
 
@@ -34,6 +37,21 @@ public class Button_functions : MonoBehaviour
     public void Load_game()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Main_level");
+    }
+    public void load_main_menu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Main_Menu");
+    }
+    public void load_tutorial()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Tutorial");
+
+    }
+    public void quit_game()
+    {
+        Application.Quit();
     }
 }

@@ -83,4 +83,13 @@ public class Player_movement : MonoBehaviour
             die();
         }
     }
+    public void heal()
+    {
+        if (health + max_health / 3 < max_health)
+        {
+            health += max_health / 3;
+        }
+        else
+            health = max_health;
+    }
 }
