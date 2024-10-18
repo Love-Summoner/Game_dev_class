@@ -43,10 +43,7 @@ public class Item : MonoBehaviour
         }
         if(is_interacting)
         {
-            if(Mathf.Abs(distance.x) > .1f)
-                transform.position = new Vector2(transform.position.x + (Time.deltaTime * speed * Mathf.Sign(distance.x)), transform.position.y);
-            if(Mathf.Abs(distance.y) > .1f)
-                transform.position = new Vector2(transform.position.x, transform.position.y + (Time.deltaTime * speed * Mathf.Sign(distance.y)));
+            transform.Translate(distance.normalized*speed * Time.deltaTime);
         }
     }
 }

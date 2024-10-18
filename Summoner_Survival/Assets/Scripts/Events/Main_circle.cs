@@ -7,6 +7,7 @@ public class Main_circle : MonoBehaviour
 {
     [SerializeField] GameObject fill_spot;
     public TMP_Text instructions_UI;
+    public TMP_Text[] stat_numbers = new TMP_Text[3];
 
     private GameObject selection, sacrifices;
     public STAT_TYPE current_ritual;
@@ -64,6 +65,7 @@ public class Main_circle : MonoBehaviour
     {
         if(cur_kills >= kill_requirement)
         {
+            stat_numbers[1].text = (System.Int32.Parse(stat_numbers[1].text) + 1).ToString();
             end_ritual();
             stats.increase_damage();
             up_difficulty();
@@ -86,6 +88,7 @@ public class Main_circle : MonoBehaviour
         cur_time += Time.deltaTime;
         if (cur_time >= surivival_time)
         {
+            stat_numbers[0].text = (System.Int32.Parse(stat_numbers[0].text) + 1).ToString();
             up_difficulty();
             stats.increase_speed();
             end_ritual();
@@ -101,6 +104,7 @@ public class Main_circle : MonoBehaviour
                 t.GetComponent<Item>().is_interacting = true;
             }
             GameObject.Find("Enemy_spawn_points").GetComponent<Spawn_enemy>().exp_multiplier += .5f;
+            stat_numbers[2].text = (System.Int32.Parse(stat_numbers[2].text) + 1).ToString();
             up_difficulty();
             cur_exp = 0;
             end_ritual();

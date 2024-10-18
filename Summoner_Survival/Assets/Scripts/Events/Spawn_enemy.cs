@@ -50,6 +50,10 @@ public class Spawn_enemy : MonoBehaviour
                 difficulty_timer = 0;
                 enemy_count++;
             }
+            if(time %240  < 20)
+        {
+            spawn_rate /= 2;
+        }
     }
     IEnumerator spawn()
     {

@@ -37,6 +37,8 @@ public class Stat_selection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.GetChild(0).gameObject.SetActive(interractable);
+
         if(interractable && Input.GetKeyDown(KeyCode.E))
         {
             ritual_circle.start_ritual(type);

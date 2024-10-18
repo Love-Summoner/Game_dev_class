@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
         }
         else if(targets.Length <= target_number) 
         {
-            target = targets[0];
+            target = targets[Random.Range(0, targets.Length)];
         }
         else if(targets.Length > target_number) 
             target = targets[target_number];
