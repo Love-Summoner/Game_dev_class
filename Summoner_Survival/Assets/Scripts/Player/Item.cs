@@ -26,6 +26,7 @@ public class Item : MonoBehaviour
             if (is_health)
             {
                 collision.gameObject.GetComponent<Player_movement>().heal();
+                Destroy(gameObject);
                 return;
             }
             if(exp_worth == 0)
