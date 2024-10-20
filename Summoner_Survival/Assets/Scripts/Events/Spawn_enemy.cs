@@ -51,7 +51,7 @@ public class Spawn_enemy : MonoBehaviour
                 enemy_count++;
                 if(time %240  < 20)
                 {
-                    spawn_rate *=.66f;
+                    spawn_rate *=.7f;
                 }
             }
             

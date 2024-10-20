@@ -12,31 +12,14 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     private Transform player_transform;
 
-    private bool firing = false;
     private void Start()
     {
         player_transform = GameObject.Find("Player").transform;
         targeting_system = GameObject.Find("Targeting_system").GetComponent<Targeting>();
-        Select_Target();
-    }
-    public void Select_Target()
-    {
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
-        if (targets.Length == 0)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        else if(targets.Length <= target_number) 
-        {
-            target = targets[Random.Range(0, targets.Length)];
-        }
-        else if(targets.Length > target_number) 
-            target = targets[Random.Range(0, targets.Length)];
-
+        distance = Camera.main.ScreenToWorldPoint(Input.mousePosition) - player_transform.position;
         rb = GetComponent<Rigidbody2D>();
-        firing = true;
     }
+    
     public void Delete_bullet()
     {
         Destroy (gameObject);
@@ -44,22 +27,10 @@ public class Bullet : MonoBehaviour
     private Vector2 distance = new Vector2();
     void FixedUpdate()
     {
-        distance = player_transform.position - transform.position;
-        if (!firing)
-            return;
-        if (target == null)
-        {
-            if (distance.sqrMagnitude > 15)
-                Destroy(gameObject);
-            else
-                return;
-        }
-        if (target != null)
-        { 
-            distance = target.transform.position - transform.position;
+        if ((player_transform.position - transform.position).sqrMagnitude > 300)
+            Destroy(gameObject);
 
-            rb.velocity = distance.normalized * speed;
-        }
+        rb.velocity = distance.normalized * speed;
     }
     private void Update()
     {

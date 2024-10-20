@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour
     public float cur_level = 0, cur_experience = 0, exp_til_level_up = 5;
     public Slider slider;
     public TMP_Text level_counter;
+    public Audio_handler audio_handler;
 
     private visualize_inventory vis;
 
@@ -25,6 +26,7 @@ public class Inventory : MonoBehaviour
     {
         vis = GameObject.Find("inventory").GetComponent<visualize_inventory>() ;
         slider = GameObject.Find("experience_bar").GetComponent<Slider>();
+        audio_handler = GameObject.Find("Audio_handler").GetComponent<Audio_handler>();
         allocate_inventory();
     }
 
@@ -54,10 +56,11 @@ public class Inventory : MonoBehaviour
             cur_level++;
             if(cur_level % 10 == 0)
             {
-                exp_increment *= 2;
+                exp_increment *= 1.5f;
             }
         }
-        
+
+        audio_handler.play_exp_sound();
         slider.value = cur_experience/exp_til_level_up;
     }
     public void change_item_count(int slot_number, int amount)

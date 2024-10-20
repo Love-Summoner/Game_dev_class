@@ -49,7 +49,7 @@ public class Enemy_AI : MonoBehaviour
         }
         else if(collision.tag == "Flame_breath")
         {
-            StartCoroutine(Damage(stats.bullet_damage));
+            StartCoroutine(Damage(stats.breath_damage));
         }
         else if (collision.tag == "Melee_attack")
         {

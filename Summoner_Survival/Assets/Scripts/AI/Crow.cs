@@ -21,8 +21,6 @@ public class Crow : MonoBehaviour
             return;
         }
         GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
-        temp.GetComponent<Bullet>().target_number = crow_count;
-        temp.GetComponent<Bullet>().Select_Target();
         StartCoroutine(shoot());
     }
 
