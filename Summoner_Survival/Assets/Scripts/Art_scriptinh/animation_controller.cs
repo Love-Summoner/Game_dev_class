@@ -12,6 +12,12 @@ public class animation_controller : MonoBehaviour
 
     public void play_running_anim()
     {
+        anim.SetBool("is_running", true);
         
     }
+    public void set_idle()
+    {
+        anim.SetBool("is_running", false);
+    }
+
 }

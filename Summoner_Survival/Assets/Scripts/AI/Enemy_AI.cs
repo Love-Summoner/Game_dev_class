@@ -68,7 +68,7 @@ public class Enemy_AI : MonoBehaviour
         enemy_sprite.color = new Color(.75f, 0f, 0f, 1) ;
         yield return new WaitForSeconds(.1f);
         health-= damage;
-        enemy_sprite.color = new Color(1, 0, 0, 1);
+        enemy_sprite.color = new Color(1, 1, 1, 1);
     }
     public void safe_damage(float i)
     {

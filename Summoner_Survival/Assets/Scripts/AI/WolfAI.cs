@@ -16,6 +16,7 @@ public class WolfAI : MonoBehaviour
     private Targeting target_system;
 
     private Summon_stats stats;
+    public animation_controller anim_controller;
 
     private void Start()
     {
@@ -29,6 +30,12 @@ public class WolfAI : MonoBehaviour
     private Vector2 distance = Vector2.zero;
     void Update()
     {
+        if (rb.velocity.magnitude > 0)
+        {
+            anim_controller.play_running_anim();
+        }
+        else
+            anim_controller.set_idle();
         speed = stats.wolf_move_speed;
         if (target != null)
         {

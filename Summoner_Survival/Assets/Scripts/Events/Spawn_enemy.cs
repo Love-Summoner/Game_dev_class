@@ -84,13 +84,8 @@ public class Spawn_enemy : MonoBehaviour
     }
     private Vector3 angular_posion(float cur_angle, float radius)
     {
-        float x_pos = radius * Mathf.Cos(cur_angle) + radius;
+        float x_pos = radius * Mathf.Cos(cur_angle);
         float y_pos = radius * Mathf.Sin(cur_angle);
-
-        if(cur_angle <= Mathf.PI/2 || cur_angle >= (Mathf.PI*3)/2) 
-        {
-            x_pos += radius;
-        }
 
         return new Vector2(x_pos, y_pos);
     }
