@@ -99,6 +99,19 @@ public class Enemy_AI : MonoBehaviour
         distance = player_loc.position - transform.position;
 
         rb.velocity = distance.normalized * speed;
+
+        flip();
+    }
+    private void flip()
+    {
+        if(rb.velocity.x < 0 && transform.localScale.x > 0)
+        {
+            transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        }
+        else if (rb.velocity.x > 0 && transform.localScale.x < 0)
+        {
+            transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        }
     }
 
     private bool is_dead = false;

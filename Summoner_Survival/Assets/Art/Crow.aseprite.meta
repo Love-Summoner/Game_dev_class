@@ -128,8 +128,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 60
+      x: 54
+      y: 61
       width: 42
       height: 42
     spriteID: 7036542daf562284d87b06137fd3b786
@@ -140,7 +140,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 60}
+    uvTransform: {x: 54, y: 61}
   - name: Crow_Frame_1
     originalName: 
     pivot: {x: 0.3333333, y: -0.20833334}
@@ -148,11 +148,51 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
+      x: 59
       y: 4
       width: 42
       height: 48
     spriteID: 247efc3d66bd3fc4d980992bfac112d7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 59, y: 4}
+  - name: Crow_Frame_2
+    originalName: 
+    pivot: {x: 0.3333333, y: -0.23913045}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 61
+      width: 42
+      height: 46
+    spriteID: 17874dd95e13cd94e9df399300a110e6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 61}
+  - name: Crow_Frame_3
+    originalName: 
+    pivot: {x: 0.4042553, y: -0.22448981}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 47
+      height: 49
+    spriteID: 6833cf49850bdc344a1e4042f09f55ea
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -186,6 +226,22 @@ ScriptedImporter:
         width: 42
         height: 48
       spriteId: 247efc3d66bd3fc4d980992bfac112d7
+    - name: Crow_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 16
+        y: 11
+        width: 42
+        height: 46
+      spriteId: 17874dd95e13cd94e9df399300a110e6
+    - name: Crow_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 11
+        y: 11
+        width: 47
+        height: 49
+      spriteId: 6833cf49850bdc344a1e4042f09f55ea
     linkedCells: []
     parentIndex: -1
   platformSettings: []

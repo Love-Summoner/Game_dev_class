@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
     public Audio_handler audio_handler;
 
     private visualize_inventory vis;
+    public Sprite[] item_sprites = new Sprite[3];
 
     private void Start()
     {
@@ -50,7 +51,9 @@ public class Inventory : MonoBehaviour
         {
             level++;
             level_counter.text = "Level " + level.ToString();
-            change_item_count(get_random_item(), 1);
+            int ran = get_random_item();
+            obtain_item_effect(ran);
+            change_item_count(ran, 1);
             cur_experience = cur_experience - exp_til_level_up;
             exp_til_level_up += exp_increment;
             cur_level++;
@@ -90,5 +93,13 @@ public class Inventory : MonoBehaviour
 
         in_a_rows[ran]++;
         return ran;
+    }
+
+    public Transform effect_location;
+    public GameObject effect_prefab;
+    private void obtain_item_effect(int index)
+    {
+        GameObject temp = Instantiate(effect_prefab, effect_location.position, Quaternion.identity);
+        temp.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = item_sprites[index];
     }
 }

@@ -7,8 +7,8 @@ using UnityEngine;
 public class Tutorial_manager : MonoBehaviour
 {
     private string[] messages = { "Hello, welcome to summoner surivival", "For 15 minutes you will be attacked by an army of goblins", "To survive this you must summon allies with a ritual circle and a ritual item",
-    "Pick up the ritual item that just spawned", "Good now walk into a ritual circle and press E", "Good! You've summoned a wolf",
-    "Wolves are summoned with bones and attack the first enemy they see", "Crows are sunnoned with feathers and shoot bullets wherever you point them", "And dragons are summoned with scales and breath fire on whoever they want","Before you start the actual game you need to know about the main ritual circle",
+    "Pick up the ritual items that just spawned", "Good now walk into a ritual circle and press E", "Good! You've summoned some allies",
+    "Wolves are summoned with bones and attack the first enemy they see", "Crows are summoned with feathers and shoot bullets in the direction you point", "And dragons are summoned with scales and breath fire on whoever they want","Before you start the actual game you need to know about the main ritual circle",
     "Follow the blank arrow until you find a large ritual circle", "This is the large ritual circle, you can use this to increase your stats.", "Select a stat to increase",
     "Now you must give all small red circles their requested item", "Congradulations you completed a stat boosting ritual and are ready to play the game.  Use escape to return to the main menu"};
 
@@ -58,10 +58,12 @@ public class Tutorial_manager : MonoBehaviour
             is_teaching = false;
             text.text = messages[cur_index];
         }
+        if(cur_index == stop_points[0])
+            spawn_item.SetActive(true);
     }
     private bool condition_met()
     {
-        if (cur_index == stop_points[0] && spawn_item == null)
+        if (cur_index == stop_points[0] && spawn_item.transform.childCount == 0)
         {
             return true;
         }
