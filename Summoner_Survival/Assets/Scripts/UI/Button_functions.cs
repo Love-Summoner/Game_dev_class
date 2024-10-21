@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Button_functions : MonoBehaviour
 {
-    private GameObject pause_menu, death_screen;
+    private GameObject pause_menu, death_screen, victory_screen;
     void Start()
     {
         if(GameObject.Find("Pause_menu") != null)
@@ -13,6 +13,8 @@ public class Button_functions : MonoBehaviour
 
         if(GameObject.Find("Death Screen") != null)
             death_screen = GameObject.Find("Death Screen").transform.GetChild(0).gameObject;
+        if (GameObject.Find("Victory_screen") != null)
+            victory_screen = GameObject.Find("Victory_screen").transform.GetChild(0).gameObject;
         Time.timeScale = 1;
     }
 
@@ -53,5 +55,16 @@ public class Button_functions : MonoBehaviour
     public void quit_game()
     {
         Application.Quit();
+    }
+
+    public void won_game()
+    {
+        victory_screen.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void start_endless_mode()
+    {
+        Time.timeScale = 1;
+        victory_screen.SetActive(false);
     }
 }

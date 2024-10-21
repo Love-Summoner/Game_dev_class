@@ -17,7 +17,9 @@ public class Bullet : MonoBehaviour
         player_transform = GameObject.Find("Player").transform;
         targeting_system = GameObject.Find("Targeting_system").GetComponent<Targeting>();
         distance = Camera.main.ScreenToWorldPoint(Input.mousePosition) - player_transform.position;
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>(); 
+        rb.velocity = distance.normalized * speed;
+        transform.right = rb.velocity.normalized;
     }
     
     public void Delete_bullet()
@@ -25,15 +27,9 @@ public class Bullet : MonoBehaviour
         Destroy (gameObject);
     }
     private Vector2 distance = new Vector2();
-    void FixedUpdate()
+    void Update()
     {
         if ((player_transform.position - transform.position).sqrMagnitude > 300)
             Destroy(gameObject);
-
-        rb.velocity = distance.normalized * speed;
-    }
-    private void Update()
-    {
-        transform.right = rb.velocity.normalized;
     }
 }

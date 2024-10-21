@@ -1,0 +1,12 @@
+to do:
+	visualize giving a ritual circle an item		done
+	Draw and animate the wolf
+	Edit tutorial to tell the player about each summon	done
+	write songs for the game
+	add highlights to interactables				partially done
+	make art for main menu and other forms of menuing
+	Get arrows to clamp below experience bar
+
+
+
+2

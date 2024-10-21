@@ -9,6 +9,7 @@ public class Spawn_enemy : MonoBehaviour
     [SerializeField] private float spawn_rate = 5, enemy_speed = 2, spawn_distance = 10.82f;
     [SerializeField] private GameObject enemy_prefab;
     public TMP_Text clock_text;
+    public Button_functions button_functions;
 
     private float difficulty = 1, seconds = 0, difficulty_timer = 0;
     private float enemy_count = 5;
@@ -16,7 +17,7 @@ public class Spawn_enemy : MonoBehaviour
     {
         
     }
-    private bool on_cooldown = false;
+    private bool on_cooldown = false, has_survived = true;
     private float time = 0;
     // Update is called once per frame ((int)(time % 60)).ToString()
     void Update()
@@ -38,6 +39,11 @@ public class Spawn_enemy : MonoBehaviour
         {
             for (int i = 0; i < enemy_count; i++)
                 spawn_enemy();
+        }
+        if(time > 900 && has_survived)
+        {
+            has_survived = false;
+            button_functions.won_game();
         }
     }
     private float next_dif_increase_at = 30;

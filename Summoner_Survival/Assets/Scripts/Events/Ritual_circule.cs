@@ -11,6 +11,8 @@ public class Ritual_circule : MonoBehaviour
     private int mat_count = 0;
     private Inventory inventory;
     private Transform crow_holder;
+
+    public Highlight_handler highlight;
     private void Start()
     {
         inventory = GameObject.Find("Player").GetComponent<Inventory>();
@@ -20,6 +22,7 @@ public class Ritual_circule : MonoBehaviour
     {
         if(collision.name == "Player")
         {
+            highlight.gameObject.SetActive(true);
             player_in_range = true;
         }
     }
@@ -38,8 +41,10 @@ public class Ritual_circule : MonoBehaviour
             return;
         if(Input.GetKeyDown(KeyCode.E)) 
         {
-            if(inventory.get_item_count((int)material_request) > 0 && mat_requirement_met())
+            if(inventory.get_item_count((int)material_request) > 0 && highlight.place_item() && mat_requirement_met())
             {
+                highlight.spawn_item_highlight();
+
                 switch(material_request)
                 {
                     case Summon_materials.BONE:

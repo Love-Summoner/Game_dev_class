@@ -8,7 +8,7 @@ public class Tutorial_manager : MonoBehaviour
 {
     private string[] messages = { "Hello, welcome to summoner surivival", "For 15 minutes you will be attacked by an army of goblins", "To survive this you must summon allies with a ritual circle and a ritual item",
     "Pick up the ritual item that just spawned", "Good now walk into a ritual circle and press E", "Good! You've summoned a wolf",
-    "You gain summon items by leveling up and you level up by killing enemies", "Before you start the actual game you need to know about the main ritual circle",
+    "Wolves are summoned with bones and attack the first enemy they see", "Crows are sunnoned with feathers and shoot bullets wherever you point them", "And dragons are summoned with scales and breath fire on whoever they want","Before you start the actual game you need to know about the main ritual circle",
     "Follow the blank arrow until you find a large ritual circle", "This is the large ritual circle, you can use this to increase your stats.", "Select a stat to increase",
     "Now you must give all small red circles their requested item", "Congradulations you completed a stat boosting ritual and are ready to play the game.  Use escape to return to the main menu"};
 
@@ -32,10 +32,10 @@ public class Tutorial_manager : MonoBehaviour
     }
     private int cur_index = 0;
     private bool is_teaching = false;
-    private int[] stop_points = { 3, 4, 8, 10, 11 };
+    private int[] stop_points = { 3, 4, 10, 12, 13 };
     void Update()
     {
-        if(cur_index == 11)
+        if(cur_index == 14)
             text.text = messages[cur_index];
         if (!is_teaching && !stop_points.Contains(cur_index))
         {
@@ -52,7 +52,7 @@ public class Tutorial_manager : MonoBehaviour
         is_teaching = true;
         text.text = messages[cur_index];
         yield return new WaitForSeconds(5);
-        if (cur_index < 12)
+        if (cur_index < 13)
         {
             cur_index++;
             is_teaching = false;
@@ -80,7 +80,7 @@ public class Tutorial_manager : MonoBehaviour
         }
         else if (cur_index == stop_points[4] && stat_increased())
         {
-            cur_index = 11;
+            cur_index = 13;
             return true;
         }
         return false;
