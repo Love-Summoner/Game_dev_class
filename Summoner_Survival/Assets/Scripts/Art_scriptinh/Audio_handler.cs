@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Audio_handler : MonoBehaviour
 {
     public float volume = .5f;
-    public AudioSource experience_sound;
+    public AudioSource experience_sound, tutorial_music;
     public Slider volume_slider;
 
     void Start()
@@ -19,6 +19,7 @@ public class Audio_handler : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+        tutorial_music.Stop();
         Update_volume();
     }
     public float exp_pitch_mod = 0;
@@ -32,6 +33,7 @@ public class Audio_handler : MonoBehaviour
     public void Update_volume()
     {
         experience_sound.volume = volume;
+        tutorial_music.volume = volume;
     }
 
     IEnumerator increase_exp_pitch()
@@ -52,6 +54,15 @@ public class Audio_handler : MonoBehaviour
             Update_volume();
         }
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        if ( !tutorial_music.isPlaying && SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            tutorial_music.Play();
+        }
+        else if(tutorial_music.isPlaying && SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            tutorial_music.Stop();
+        }
     }
 
     void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)

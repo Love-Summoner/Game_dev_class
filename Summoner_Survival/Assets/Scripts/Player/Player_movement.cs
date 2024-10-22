@@ -43,6 +43,8 @@ public class Player_movement : MonoBehaviour
 
         health_bar.transform.position = cam.WorldToScreenPoint(bar_tracker.transform.position);
         slider.value =  health/max_health;
+
+        
     }
 
     [SerializeField]private float cur_speed = 0;
@@ -91,5 +93,16 @@ public class Player_movement : MonoBehaviour
         }
         else
             health = max_health;
+    }
+    private void flip()
+    {
+        if (rb.velocity.x < 0 && transform.localScale.x > 0)
+        {
+            transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        }
+        else if (rb.velocity.x > 0 && transform.localScale.x < 0)
+        {
+            transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+        }
     }
 }

@@ -1,11 +1,11 @@
 to do:
 	visualize giving a ritual circle an item		done
-	Draw and animate the wolf
+	Draw and animate the wolf				partially done
 	Edit tutorial to tell the player about each summon	done
-	write songs for the game
+	write songs for the game				partially done
 	add highlights to interactables				partially done
-	make art for main menu and other forms of menuing
-	Get arrows to clamp below experience bar
+	make art for main menu and other forms of menuing	done
+	Get arrows to clamp below experience bar		done
 
 
 
