@@ -15,7 +15,8 @@ public class Spawn_enemy : MonoBehaviour
     private float enemy_count = 5;
     void Start()
     {
-        
+        if(is_main_level)
+            StartCoroutine(play_message("The great circle is temporarily sealed"));
     }
     private bool on_cooldown = false, has_survived = true;
     private float time = 0;
@@ -45,6 +46,7 @@ public class Spawn_enemy : MonoBehaviour
             has_survived = false;
             button_functions.won_game();
         }
+        open_great_circle();
     }
     private float next_dif_increase_at = 30;
     private void increase_difficulty()
@@ -88,5 +90,26 @@ public class Spawn_enemy : MonoBehaviour
         float y_pos = radius * Mathf.Sin(cur_angle);
 
         return new Vector2(x_pos, y_pos);
+    }
+
+    public GameObject selections, fill_spots;
+    public TMP_Text text;
+    public bool is_main_level = false;
+    private void open_great_circle()
+    {
+        if(is_main_level && time > 180)
+        {
+            selections.SetActive(true);
+            fill_spots.SetActive(true);
+
+            StartCoroutine(play_message("The great circle is now open"));
+            is_main_level=false;
+        }
+    }
+    IEnumerator play_message(string message)
+    {
+        text.text = message;
+        yield return new WaitForSeconds(10);
+        text.text = "";
     }
 }

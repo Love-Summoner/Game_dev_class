@@ -6,7 +6,4 @@ to do:
 	add highlights to interactables				partially done
 	make art for main menu and other forms of menuing	done
 	Get arrows to clamp below experience bar		done
-
-
-
-2
+	Make main circle not available fot the first 3 minutes	

@@ -67,4 +67,9 @@ public class Button_functions : MonoBehaviour
         Time.timeScale = 1;
         victory_screen.SetActive(false);
     }
+    public GameObject controls_screen;
+    public void show_controls()
+    {
+        controls_screen.SetActive(!controls_screen.activeSelf);
+    }
 }

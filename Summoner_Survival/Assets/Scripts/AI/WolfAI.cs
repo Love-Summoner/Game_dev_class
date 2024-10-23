@@ -111,7 +111,8 @@ public class WolfAI : MonoBehaviour
     private bool is_attacking = false;
     IEnumerator attack()
     {
-        if(target != null) 
+        anim_controller.play_attack_animation();
+        if (target != null) 
             target.GetComponent<Enemy_AI>().safe_damage(stats.melee_damage);
         is_attacking = true;
         attack_box.SetActive(true);

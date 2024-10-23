@@ -38,7 +38,6 @@ public class Item : MonoBehaviour
             if(circle.Ritual_being_done && circle.current_ritual == STAT_TYPE.GROWTH)
             {
                 circle.cur_exp += exp_worth;
-                return;
             }
             player_inventory.level_up(exp_worth);
 
