@@ -61,7 +61,11 @@ public class Spawn_enemy : MonoBehaviour
                 {
                     spawn_rate *=.7f;
                 }
+            if (time % 960 < 20)
+            {
+                spawn_rate *= .2f;
             }
+        }
             
     }
     IEnumerator spawn()
