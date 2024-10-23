@@ -89,7 +89,7 @@ public class Tutorial_manager : MonoBehaviour
     }
     private bool stat_increased()
     {
-        if(speed < stats.fire_speed)
+        if(speed > stats.fire_speed)
         {
             return true;
         }
